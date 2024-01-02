@@ -1,0 +1,126 @@
+.container {
+    max-width: 400px;
+    margin: 50px auto;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .text {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .underline {
+    height: 2px;
+    width: 50px;
+    background-color: red;
+    margin: 10px auto;
+  }
+  
+  .inputs {
+    margin-bottom: 20px;
+  }
+  
+  .input {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  
+  input {
+    flex: 1;
+    padding: 10px;
+    margin-left: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  img {
+    max-width: 20px;
+    max-height: 20px;
+  }
+  
+  .submit-container {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .submit {
+    flex: 1;
+    padding: 8px;
+    text-align: center;
+    font-size: 16px;
+    color: #fff;
+    background-color:green;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  .submit.gray {
+    background-color: #ccc;
+  }
+  
+  .submit:hover {
+    background-color: green;
+  }
+  
+  .social-login {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .social-button {
+    flex: 0.48;
+    padding: 8px;
+    text-align: center;
+    font-size: 12px; /* Adjusted font size */
+    color: #fff;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  .facebook {
+    background-color: #3b5998; /* Facebook blue color */
+  }
+  
+  .google {
+    background-color: #dd4b39; /* Google red color */
+  }
+  
+  .verification-code {
+    margin-top: 20px;
+  }
+  
+  .verification-code .input {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  
+  .verification-code input {
+    flex: 1;
+    padding: 10px;
+    margin-left: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .verification-code .submit {
+    flex: 1;
+    padding: 8px;
+    text-align: center;
+    font-size: 16px;
+    color: #fff;
+    background-color: #007bff;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  

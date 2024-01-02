@@ -1,0 +1,77 @@
+img {
+  max-width: 200px;
+  max-height: 200px;
+}
+
+.navbar-menu-container {
+  display: none;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 50px;
+}
+
+.navbar-logo-container,
+.navbar-links-container,
+.navbar-menu-container {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-logo-container img {
+  max-width: 150px; /* Adjust the size as needed */
+  max-height: 250px; /* Adjust the size as needed */
+}
+
+.navbar-links-container a {
+  margin-left: 1rem;
+  margin-right: 4rem;
+  text-decoration: none;
+  color: black;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.btn {
+  padding: 0.9rem 1.75rem;
+  background-color: white;
+  outline: none;
+  border: none;
+  border-radius: 5rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.navbar-cart-icon {
+  font-size: 1.15rem;
+}
+
+.btn:hover {
+  background-color: rgb(234, 234, 234);
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  padding: 20px 20px;
+}
+
+.search-box input {
+  padding: 6px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  margin-left: 1rem;
+  outline: none;
+  font-size: 1rem;
+  max-width: 200px;
+}
+
+.search-box img {
+  max-width: 20px; 
+  cursor: pointer;
+}
