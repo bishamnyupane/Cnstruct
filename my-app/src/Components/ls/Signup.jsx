@@ -1,6 +1,6 @@
 import React from 'react';
 import './Signup.css';
-
+import { Link } from 'react-router-dom';
 import user_icon from '../../assets/person.png';
 import email_icon from '../../assets/email.png';
 import password_icon from '../../assets/password.png';
@@ -35,12 +35,14 @@ const Signup = ({ onToggle }) => {
         </div>
       </div>
       <div className='submit-container'>
-        <div className='submit' onClick={() => onToggle('Sign Up')}>
-          Sign Up
-        </div>
-        <div className='submit gray' onClick={() => onToggle('Login')}>
+        <Link to="/Signup" className='submit' onClick={() => onToggle('Signup')}>
+          Signup
+          </Link>
+        {/* </div> */}
+        {/* <Link to="/Login" className='submit gray' onClick={() => onToggle('Login')}>
           Login
-        </div>
+          </Link> */}
+        {/* </div> */}
       </div>
       <div className='social-login'>
         <div className='social-button facebook'>Facebook</div>

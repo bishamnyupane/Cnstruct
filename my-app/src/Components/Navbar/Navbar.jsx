@@ -1,58 +1,68 @@
-import React,{useState} from "react";
-import {BsCart2} from "react-icons/bs";
-import {HiOutlineBars3} from "react-icons/hi2";
-import {Box,Drawer,Divider,ListItem,ListItemButton,ListItemIcon,ListItemText,List,} from "@mui/material";
-import './Navbar.css'
-import logo_light from '../../assets/logo-black.png'
-import search_icon_light from '../../assets/se.png'
-import ShoppingCartRoundedIcon from "@mui/icons-material/ShoppingCartRounded";
+import React, { useState } from 'react';
+import { BsCart2 } from 'react-icons/bs';
+import { HiOutlineBars3 } from 'react-icons/hi2';
+import {
+  Box,
+  Drawer,
+  Divider,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  List,
+} from '@mui/material';
+import './Navbar.css';
+import logo_light from '../../assets/logo-black.png';
+import search_icon_light from '../../assets/se.png';
+import ShoppingCartRoundedIcon from '@mui/icons-material/ShoppingCartRounded';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
+  const [openMenu, setOpenMenu] = useState(false);
 
-    const [openMenu,setOpenMenu]=useState(false);
-    const menuOptions = [
-      {
-        text: "Home",
-      },
+  const menuOptions = [
+    {
+      text: 'Home',
+    },
+    {
+      text: 'Shop',
+    },
+    {
+      text: 'About',
+    },
+    {
+      text: 'Cart',
+      icon: <ShoppingCartRoundedIcon />,
+    },
+  ];
 
-      {
-        text: "Shop",
-      },
-      {
-        text: "About",
-      },
-
-      {
-        text: "cart",
-        icon:<ShoppingCartRoundedIcon/>
-      },
-
-      
-    ];
-
-    
   return (
-  <nav>
+    <nav>
       <div className="navbar-logo-container">
         <img src={logo_light} alt="" />
       </div>
       <div className="navbar-links-container">
-        <a href="">Home</a>
-        <a href="">shop</a>
-        <a href="">About</a>
-        <a href="">
-          <BsCart2 className="navbar-cart-icon" />
-        </a>
+        <Link to="/Home">Home</Link>
+        <Link to="/shop">Shop</Link>
+        <Link to="/about">About</Link>
+        <Link to="/Cart">
+          <BsCart2 className="navbar-cart-icon" />Cart
+        </Link>
 
+       
         <div className="search-box">
-      <input type="text" placeholder='Search'/>
-      <img src={search_icon_light} alt="" />
-    </div>
+          <input type="text" placeholder="Search" />
+          <img src={search_icon_light} alt="" />
+        </div>
 
-        <button className="btn">Login</button>
-        <button className="btn">Register</button>
+        <Link to="/login" className="btn">
+          Login
+        </Link>
+        <Link to="/signup" className="btn">
+          Signup
+        </Link>
       </div>
-      
+
       <div className="navbar-menu-container">
         <HiOutlineBars3 onClick={() => setOpenMenu(true)} />
       </div>
@@ -77,11 +87,8 @@ const Navbar = () => {
           <Divider />
         </Box>
       </Drawer>
-
-
-
     </nav>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;

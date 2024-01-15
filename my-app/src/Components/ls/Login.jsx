@@ -1,5 +1,6 @@
 import React from 'react';
 import './Login.css';
+import { Link } from 'react-router-dom';
 
 import email_icon from '../../assets/email.png';
 import password_icon from '../../assets/password.png';
@@ -25,12 +26,14 @@ const Login = ({ onToggle }) => {
         Forget Password?<span>Click Here!</span>
       </div>
       <div className='submit-container'>
-        <div className='submit gray' onClick={() => onToggle('Sign Up')}>
+        {/* <Link to="/Signup" className='submit gray' onClick={() => onToggle('Signup')}>
           Sign Up
-        </div>
-        <div className='submit' onClick={() => onToggle('Login')}>
+          </Link> */}
+        {/* </div> */}
+          <Link to="/Login" className='submit' onClick={() => onToggle('Login')}>
           Login
-        </div>
+          </Link>
+        {/* </div> */}
       </div>
     </div>
   );

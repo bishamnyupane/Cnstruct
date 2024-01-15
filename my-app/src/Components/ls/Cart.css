@@ -1,0 +1,70 @@
+/* Cart.css */
+
+/* Cart Table Section */
+.cart-table-section {
+    margin-bottom: 20px;
+  }
+  
+  .cart-table {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .cart-table th,
+  .cart-table td {
+    border: 1px solid #eee;
+    padding: 15px;
+    text-align: left;
+  }
+  
+  .cart-table th {
+    background-color: #f2f2f2;
+  }
+  
+ 
+  
+  /* Subtotal Section */
+  .subtotal-section {
+    text-align: right;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .subtotal-section h3 {
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  .subtotal-section table {
+    width: 100%;
+  }
+  
+  .subtotal-section td {
+    padding: 10px;
+  }
+  
+  .subtotal-section button {
+    padding: 10px 15px;
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .subtotal-section button:hover {
+    background-color: #45a049;
+  }
+  
+  .cart-table-section .cart-table tbody tr td img {
+    width: 100%;
+    height: 100%;
+    max-width: 500px;  /* Adjust the max-width as needed */
+    max-height: 250px; /* Adjust the max-height as needed */
+    object-fit: cover;
+  }
+  
+  
