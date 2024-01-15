@@ -1,4 +1,4 @@
-
+/* 
 .card-container {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -81,4 +81,72 @@
     font-size: 24px;
     color: #ff5757; 
   }
-  
+   */
+
+   /* Home.css */
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.card {
+  width: 250px;
+  margin: 20px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  text-align: center;
+  transition: transform 0.3s ease-in-out;
+  background-color: #fff;
+  z-index: 1;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.card-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.card-img {
+  width: 100%;
+  max-width: 100%; /* Set maximum width */
+  height: auto;
+  max-height: 200px; /* Set maximum height */
+  border-radius: 5px;
+}
+
+.card-details {
+  margin-top: 10px;
+}
+
+.card-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.card-price {
+  font-size: 16px;
+  color: #333;
+}
+
+.bag {
+  margin-top: 15px;
+  z-index: -1;
+}
+
+.bag button {
+  background: #4caf50;
+  color: #fff;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Add more styles as needed */

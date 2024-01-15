@@ -4,6 +4,7 @@ import Login from './Components/ls/Login';
 import Signup from './Components/ls/Signup';
 import Home from './Components/ls/Home';
 import Cart from './Components/ls/Cart';
+import Card from './Components/ls/Card';
 import ProductDetails from './Components/ls/ProductDetails';
 import { BrowserRouter as Router, Routes, Route,Link ,useNavigate} from 'react-router-dom';
 
@@ -29,14 +30,15 @@ function App() {
         {currentOption === 'Signup' && <Signup onToggle={handleToggleOption} />}
 
         <Routes>
-          <Route path='/Home' element={<Home onAddToCart={handleAddToCart}/>}/>
+          <Route path='/Home' element={<Home onAddToCarts={handleAddToCart}/>}/>
           <Route path="/Login" element={<Login/>}/>
           <Route path="/Signup" element={<Signup/>}/>
           <Route path="/Cart" element={<Cart/>}/>
 
-          <Route path="/" element={<Home onAddToCart={handleAddToCart} />} />
+          <Route path="/" element={<Home onAddToCarts={handleAddToCart} />} />
           <Route path="/Cart" element={<Cart cartItems={cartItems} />} />
-          <Route path="/product/:productId" element={<ProductDetails onAddToCart={handleAddToCart} />} />
+          
+          <Route path="/product/:productId" element={<ProductDetails onAddToCarts={handleAddToCart} />} />
         </Routes>
         </div>
     </Router>
