@@ -1,7 +1,16 @@
 // ProductDetails.jsx
 import React from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
-import cements from '../../assets/logo-black.png';
+import cements from '../../assets/cements.png';
+import angle from '../../assets/angle.png';
+import bento from '../../assets/bento.png';
+import cgi from '../../assets/cgi.png';
+import fontite from '../../assets/fontite.png';
+import jagadamba from '../../assets/jagadamba.png';
+import mspipe from '../../assets/mspipe.png';
+import props from '../../assets/props.png';
+import square from '../../assets/squre.png';
+import fillfaces from '../../assets/fillfaces.png';
 import './ProductDetails.css';
 
 const ProductDetails = ({ onAddToCart }) => {
@@ -18,58 +27,58 @@ const ProductDetails = ({ onAddToCart }) => {
       description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde nisi vitae asperiores et mollitia saepe...",
     },
     2: {
-        name: "Cements",
-        price: "700",
-        imageUrl: cements,
+        name: "Fill Face Shuttering Plywood 32 Sq. Ft.: 18 mm",
+        price: "6000",
+        imageUrl: fillfaces,
         description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde nisi vitae asperiores et mollitia saepe...",
       },
       3: {
         name: "Cements",
-        price: "700",
-        imageUrl: cements,
+        price: "150",
+        imageUrl: jagadamba,
         description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde nisi vitae asperiores et mollitia saepe...",
       },
       4: {
         name: "Cements",
-        price: "700",
-        imageUrl: cements,
+        price: "8000",
+        imageUrl: square,
         description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde nisi vitae asperiores et mollitia saepe...",
       },
       5: {
         name: "Cements",
-        price: "700",
-        imageUrl: cements,
+        price: "2000",
+        imageUrl: mspipe,
         description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde nisi vitae asperiores et mollitia saepe...",
       },
       6: {
         name: "Cements",
-        price: "700",
-        imageUrl: cements,
+        price: "2600",
+        imageUrl: angle,
         description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde nisi vitae asperiores et mollitia saepe...",
       },
       7: {
         name: "Cements",
-        price: "700",
-        imageUrl: cements,
+        price: "2304",
+        imageUrl: cgi,
         description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde nisi vitae asperiores et mollitia saepe...",
       },
 
       8: {
         name: "Cements",
-        price: "700",
-        imageUrl: cements,
+        price: "1330",
+        imageUrl: bento,
         description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde nisi vitae asperiores et mollitia saepe...",
       },
       9: {
         name: "Cements",
-        price: "700",
-        imageUrl: cements,
+        price: "1500",
+        imageUrl: props,
         description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde nisi vitae asperiores et mollitia saepe...",
       },
       10: {
         name: "Cements",
-        price: "700",
-        imageUrl: cements,
+        price: "200",
+        imageUrl: fontite,
         description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde nisi vitae asperiores et mollitia saepe...",
       },
     // Add details for other products if needed

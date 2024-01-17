@@ -52,8 +52,20 @@ const Navbar = () => {
        
         <div className="search-box">
           <input type="text" placeholder="Search" />
-          <img src={search_icon_light} alt="" />
+          <img src={search_icon_light} alt="Search" />
         </div>
+
+        {/* <div className="input-group search-box">
+  <input
+    type="text"
+    className="form-control"
+    placeholder="Search"
+  />
+  <button className="btn btn-outline-secondary" type="button">
+    <img src={search_icon_light} alt="Search" />
+  </button>
+</div> */}
+
 
         <Link to="/login" className="btn">
           Login
@@ -75,14 +87,14 @@ const Navbar = () => {
           onKeyDown={() => setOpenMenu(false)}
         >
           <List>
-            {menuOptions.map((item) => (
+          {menuOptions.map((item) => (
               <ListItem key={item.text} disablePadding>
-                <ListItemButton>
-                  <ListItemIcon>{item.icon}</ListItemIcon>
-                  <ListItemText primary={item.text} />
-                </ListItemButton>
-              </ListItem>
-            ))}
+                    <ListItemButton>
+                      {item.icon && <ListItemIcon>{item.icon}</ListItemIcon>}
+                      <ListItemText primary={item.text} />
+                    </ListItemButton>
+                  </ListItem>
+                ))}
           </List>
           <Divider />
         </Box>

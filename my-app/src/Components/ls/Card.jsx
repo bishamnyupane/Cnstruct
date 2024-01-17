@@ -1,30 +1,26 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { BsFillBagHeartFill } from 'react-icons/bs';
 
-const Card = ({ productId, name, price, imageUrl, onAddToCarts }) => {
-  const handleAddToCart = () => {
-    onAddToCarts({ productId, name, price, imageUrl });
-
-  }
+const Card = ({ id, name, price, image, addToCart }) => {
+  
 
   return (
-    <div className="card">
-      <Link to={`/product/${productId}`} className="card-link">
-        <img src={imageUrl} alt={name} className="card-img" />
-        <div className="card-details">
-          <h3 className="card-title">{name}</h3>
-          <section className="card-price">
-            <div className="price">Rs. {price}</div>
-          </section>
-        </div>
-      </Link>
-      <div className="bag">
-      <button onClick={handleAddToCart}>
-        <BsFillBagHeartFill />
-      </button>
-      </div>
-      </div>
+
+<div className="card">
+  <img src={image} alt={name} className="card-img" />
+  <div className="card-details">
+    <h3 className="card-title">{name}</h3>
+    <section className="card-price">
+      <div className="price">Rs. {price}</div>
+
+    </section>
+  </div>
+<div className="bag">
+<button onClick={() => addToCart({ id, name, price, image })}>
+  <BsFillBagHeartFill />
+</button>
+</div>
+</div>
   );
 };
 

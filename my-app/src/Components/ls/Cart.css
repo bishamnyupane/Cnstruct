@@ -24,7 +24,11 @@
 }
 
 .cart-table td img {
-  width: 50px;
+  width: 100%;
+  max-width: 100%; /* Set maximum width */
+  height: auto;
+  max-height: 200px; /* Set maximum height */
+  border-radius: 5px;
 }
 
 .subtotal-section {

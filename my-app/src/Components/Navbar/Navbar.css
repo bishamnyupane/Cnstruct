@@ -1,17 +1,10 @@
-img {
-  max-width: 200px;
-  max-height: 200px;
-}
-
-.navbar-menu-container {
-  display: none;
-}
 
 nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
   min-height: 50px;
+  padding: 0 20px; /* Added padding to create a gap */
 }
 
 .navbar-logo-container,
@@ -22,16 +15,16 @@ nav {
 }
 
 .navbar-logo-container img {
-  max-width: 150px; /* Adjust the size as needed */
-  max-height: 250px; /* Adjust the size as needed */
+  max-width: 150px; 
+  max-height: 250px; 
 }
 
 .navbar-links-container a {
   margin-left: 1rem;
-  margin-right: 4rem;
+  margin-right: 2rem; 
   text-decoration: none;
   color: black;
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 600;
 }
 
@@ -41,37 +34,58 @@ nav {
   outline: none;
   border: none;
   border-radius: 5rem;
-  font-size: 1.1rem;
+  font-size: 1rem; 
   cursor: pointer;
   font-weight: 600;
   transition: 0.2s;
 }
 
 .navbar-cart-icon {
-  font-size: 1.15rem;
+  font-size: 1rem; 
 }
 
-.btn:hover {
-  background-color: rgb(234, 234, 234);
+@media (max-width: 768px) {
+  nav {
+    padding: 0 10px; 
+  }
+
+  .navbar-links-container {
+    display: none; 
+  }
+
+  .navbar-menu-container {
+    display: flex;
+    margin-right: 10px; 
+  }
+
+  .navbar-links-container a,
+  .btn {
+    margin: 10px 0; 
+  }
 }
 
 .search-box {
   display: flex;
   align-items: center;
-  padding: 20px 20px;
+  background-color: #fff; 
+  border: 1px solid #ccc; 
+  border-radius: 5px; 
+  padding: 5px;
 }
 
 .search-box input {
-  padding: 6px;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  margin-left: 1rem;
-  outline: none;
-  font-size: 1rem;
-  max-width: 200px;
+  border: none; 
+  outline: none; 
+  flex: 1;
+  padding: 5px;
 }
 
 .search-box img {
   max-width: 20px; 
+  margin-left: 5px;
   cursor: pointer;
+}
+
+.search-box img:hover {
+  opacity: 0.8;
 }

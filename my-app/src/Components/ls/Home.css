@@ -85,7 +85,7 @@
 
    /* Home.css */
 
-.card-container {
+.app {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
