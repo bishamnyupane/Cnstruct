@@ -40,6 +40,7 @@ function App() {
           <Route path="/Login" element={<Login/>}/>
           <Route path="/Signup" element={<Signup/>}/>
           <Route path="/Cart" element={<Cart cartItems={cartItems} setCartItems={setCartItems} />} />
+          <Route path="/product/:productId" element={<ProductDetails onAddToCart={addToCart} />} />
           <Route path="/" element={<Home addToCart={addToCart} cartItems={cartItems} setCartItems={setCartItems} />} />          
         </Routes>
         </div>
