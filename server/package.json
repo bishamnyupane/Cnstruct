@@ -4,7 +4,11 @@
   "description": "back-end for the Construct application",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "client": "npm start --prefix my-app",
+    "dev": "concurrently \"npm run server\" \"npm run my-app\""
   },
   "author": "prsydha",
   "license": "ISC",
@@ -14,6 +18,7 @@
     "config": "^3.3.10",
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.2",
+    "mysql2": "^3.7.1",
     "nodemon": "^3.0.3",
     "validator": "^13.11.0"
   }
