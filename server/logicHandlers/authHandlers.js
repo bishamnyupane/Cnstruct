@@ -107,7 +107,8 @@ module.exports.login = async (req, res) => {
     );
 }
 
-module.exports.get_user = (req, res) => {
+module.exports.getUser = (req, res) => {
+    
     connection.query(
         "SELECT * FROM users WHERE id=?", [req.user.id, (err, results, fields) => {
             if(err) throw err;
