@@ -4,9 +4,9 @@ const bcrypt = require('bcrypt');
 const connection = require('../server');
 
 module.exports.signup = (req, res) => {
-    const { name, email, password } = req.body;
+    const { name, email, password, address, phone, dob } = req.body;
 
-    if( !name || !email || !password ){
+    if( !name || !email || !password || !address || !phone || !dob ){
         res.status(400).json({msg: "Please enter all fields"});
     }
 
@@ -23,41 +23,43 @@ module.exports.signup = (req, res) => {
             }
         );
 
-    const user = { name, email, password };
-
     bcrypt.genSalt(10, (err, salt) => {
         bcrypt.hash(password, salt, (err, hash) => {
             if(err) throw err;
-            user.password = hash;
-            
-            const user_id = ""; 
+            password = hash; 
 
-            connection.query("INSERT INTO users (full_name, email, user_password) VALUES (?, ?, ?)", [user.name, user.email, user.password], (err, results, fields) => {
+            let user;
+
+            connection.query("INSERT INTO users (fullName, email, password, address, phone, dob) VALUES (?, ?, ?, ?, ?, ?)", [name, email, password, address, phone, dob], (err, results, fields) => {
                     if(err){
                         console.log("error while inserting user", err);
                         return res.status(400).send();
                     }
-                    connection.query("SELECT id FROM users WHERE email=?", [email], (err, results, fields) => {
-                        user_id = results[0].id;
+                    
+                    connection.query("SELECT * FROM users WHERE email=?", [email], (err, results, fields) => {
+                     user = results[0];
                     });
+
+                    jwt.sign(
+                        { id: user.id },
+                        config.get('jwtsecret'),
+                        { expiresIn: 3600 },
+                        (err, token) => {
+                            if(err) throw err;
+                            res.json({
+                                token,
+                                customer: {
+                                    id: user.id,
+                                    name: user.name,
+                                    email: user.email
+                                }
+                            });
+                        }
+                    )
+
                     return res.status(201).json({message: "new user created successfully."});
                 })
-            jwt.sign(
-                { id: user_id },
-                config.get('jwtsecret'),
-                { expiresIn: 3600 },
-                (err, token) => {
-                    if(err) throw err;
-                    res.json({
-                        token,
-                        user: {
-                            id: user_id,
-                            name: user.name,
-                            email: user.email
-                        }
-                    });
-                }
-            )
+            
         });
     });
  }
@@ -82,7 +84,7 @@ module.exports.login = async (req, res) => {
          const user = results[0];
 
          //validate password
-         bcrypt.compare(password, results[0].password)
+         bcrypt.compare(password, user.password)
          .then(isMatch => {
             if(!isMatch) return res.status(400).json({msg:'Invalid credentials'});
 
