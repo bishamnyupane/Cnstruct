@@ -11,10 +11,10 @@ module.exports.getItems = (req, res) => {
 }
 
 module.exports.postItem = (req, res) => {
-    const { name, price, date } = req.body;
-    const newItem = { name, price, date };
+    const { name, price } = req.body;
+    const newItem = { name, price };
     connection.query(
-        "INSERT INTO product (name, price, date) VALUES (?, ?, ?)", [name, price, date], (err, results, fields) => {
+        "INSERT INTO product (name, price) VALUES (?, ?)", [name, price], (err, results, fields) => {
             if(err) throw err;
             res.json(newItem);
         }
