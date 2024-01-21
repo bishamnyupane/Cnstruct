@@ -6,7 +6,7 @@ const mysql = require('mysql2');
 //creating an instance of express and setting up a middleware to parse JSON in requests
 const app = express();
 app.use(express.json());
-app.listen(3000, () => console.log('server running on port 3000'));
+app.listen(3001, () => console.log('server running on port 3000'));
 
 //setting up server file to serve static content which will be generated from React app in production
 if(process.env.NODE_ENV === 'production')
