@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const config = require('config');
-const mysql = require('mysql2');
+const mysql = require('mysql');
 
 //creating an instance of express and setting up a middleware to parse JSON in requests
 const app = express();
@@ -9,13 +9,14 @@ app.use(express.json());
 app.listen(3001, () => console.log('server running on port 3000'));
 
 //setting up server file to serve static content which will be generated from React app in production
-if(process.env.NODE_ENV === 'production')
-{
-    app.use(express.static(path.resolve(__dirname, 'my-app', 'build')));
-    app.get('*', (req,res) => {
-        res.sendFile(path.resolve(___dirname, 'my-app', 'build', 'index.html'));
-    });
-}
+
+// if(process.env.NODE_ENV === 'production')
+// {
+//     app.use(express.static(path.resolve(__dirname, 'my-app', 'build')));
+//     app.get('*', (req,res) => {
+//         res.sendFile(path.resolve(__dirname, 'my-app', 'build', 'index.html'));
+//     });
+// }
 
 //mysql connection
 const connection = mysql.createConnection({
