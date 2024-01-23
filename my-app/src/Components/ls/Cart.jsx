@@ -4,8 +4,9 @@ import { CiCircleRemove } from 'react-icons/ci';
 import './Cart.css';
 
   const Cart = ({ cartItems , setCartItems}) => {
-
+    
     const handleQuantityChange = (itemId, newQuantity) => {
+      newQuantity = Math.max(0, newQuantity);
       const updatedCart = cartItems.map((item) => (item.id === itemId ? { ...item, quantity: newQuantity } : item));
       setCartItems(updatedCart);
     
