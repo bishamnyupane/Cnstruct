@@ -159,8 +159,8 @@ app.get('/user', auth, (req, res) => {
 //cart handlers and routes:
 
 //fetch all items in the cart of a user
-app.get('/cart/:id', async (req, res) => {
-    const userId = req.params.id;
+app.get('/cart', async (req, res) => {
+    const userId = req.body.id;
     try{
         connection.query("SELECT productId, quantity, name, price FROM cart INNER JOIN product ON cart.productId = product.id WHERE userId = ?", [userId], (err, results, fields) => {
             if(err){
@@ -183,6 +183,77 @@ app.get('/cart/:id', async (req, res) => {
     }
 } )
 
+//add item to cart
+app.post('/cart', async (req, res) => {
+    const userId = req.body.id;
+    const { productId, quantity } = req.body;
+
+    try{
+        connection.query("SELECT * FROM product WHERE id = ?", [productId], (err, results, fields) => {
+            if(err) throw err;
+            if(results.length == 0){
+                return res.status(404).send('Item not found.');
+            }
+            connection.query("SELECT * FROM cart WHERE userId = ?", [userId], (err, results, fields) => {
+                if(err) throw err;
+
+                    const foundProduct = results.find(obj => obj.productId === productId);
+
+                    //if product is already present in cart
+                    if(foundProduct){
+                        connection.query("UPDATE cart SET quantity = quantity + ? WHERE productId = ? AND userId = ?", [quantity, productId, userId], (err, results, fields) => {
+                            if(err) throw err;
+                            connection.query("SELECT productId, quantity, name, price FROM cart INNER JOIN product ON cart.productId = product.id WHERE userId = ?", [  userId, productId], (err, results, fields) => {
+                                if(err) throw err;
+                                return res.status(201).send(results);
+                            });
+                        });
+                    }
+
+                    //if product isnt already present in cart
+                    else{
+                        connection.query("INSERT INTO cart VALUES (?, ?, ?)", [userId, productId, quantity], (err, results, fields) => {
+                            if(err) throw err;
+                            connection.query("SELECT productId, quantity, name, price FROM cart INNER JOIN product ON cart.productId = product.id WHERE userId = ?", [  userId], (err, results, fields) => {
+                                if(err) throw err;
+                                return res.status(201).send(results);
+                            });
+                        });
+                    }
+
+                
+            })
+        })
+    } catch(err){
+        console.log(err);
+        res.status(500).send("something went wrong");
+    }
+})
+
+//delete item from cart
+app.delete('/cart', async (req, res) => {
+    const userId = req.body.userId;
+    const productId = req.body.productId;
+
+    try{
+        connection.query("SELECT * FROM cart WHERE userId = ? AND productId = ?", [userId, productId], (err, results, field) => {
+            if(err) throw err;
+            if(results.length == 0){
+                return res.status(400).send("invalid deletion, specified item doesn't exist");
+            }
+            connection.query("DELETE FROM cart WHERE userId = ? AND productId = ?", [userId, productId], (err, results, fields) => {
+                if(err) throw err;
+                connection.query("SELECT productId, quantity, name, price FROM cart INNER JOIN product ON cart.productId = product.id WHERE userId = ? ", [  userId], (err, results, fields) => {
+                    if(err) throw err;
+                    return res.status(201).send(results);
+                });
+            });
+        })
+    } catch (err) {
+        console.log(err);
+        res.status(500).send("something went wrong");
+    }
+})
 
 //routes and handlers for cart completed
 
@@ -242,6 +313,9 @@ app.delete('/item', (req, res) => {
 })
 
 //routes and handlers for item completed
+
+
+
 
 //reading all users from the db
 // app.get("/read", async (req, res) => {
