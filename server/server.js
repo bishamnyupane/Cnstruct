@@ -154,86 +154,175 @@ app.get('/user', auth, (req, res) => {
 
 })
 
-//reading all users from the db
-app.get("/read", async (req, res) => {
+//auth handlers and routes completed
+
+//cart handlers and routes:
+
+//fetch all items in the cart of a user
+app.get('/cart/:id', async (req, res) => {
+    const userId = req.params.id;
     try{
-        connection.query("SELECT * FROM users", (err, results, fields) => {
+        connection.query("SELECT productId, quantity, name, price FROM cart INNER JOIN product ON cart.productId = product.id WHERE userId = ?", [userId], (err, results, fields) => {
+            if(err){
+                console.log("error while fetching cart:", err);
+                throw err;
+            }
+
+            //if a cart exists for the user and cart is non-empty then return the cart, else return null
+
+            if(results.length>0){
+                res.send(results);
+            }
+            else{
+                res.send(null);
+            }
+        });
+    } catch(err){
+        console.log(err);
+        res.status(500).send("something went wrong");
+    }
+} )
+
+
+//routes and handlers for cart completed
+
+//routes and handlers for item
+
+app.get('/item', (req, res) => {
+    connection.query(
+        "SELECT * FROM product",
+        (err, results, fields) => {
+            if(err) throw err;
+            res.json(results);
+        }
+    );
+})
+
+app.post('/item', (req, res) => {
+    const { name, price } = req.body;
+    const newItem = { name, price };
+    connection.query(
+        "INSERT INTO product (name, price) VALUES (?, ?)", [name, price], (err, results, fields) => {
             if(err) {
-                console.log(err);
-                return res.status(400).send();
+                console.log("error while inserting item:", err);
+                throw err;
             }
-            res.status(200).json(results);
-        });
-    }
-    catch(err){
-        console.log(err);
-        return res.status(500).send();
-    }
-});
+            res.json(newItem);
+        }
+    );
+    
+})
 
-//reading specific users from the db
-app.get("/read/single", async(req, res) => {
-    const email = req.body.email;
-
-    try{
-        connection.query("SELECT * FROM users WHERE email = ?", [email], (err, results, fields) => {
-            if(err)
-            {
-                console.log(err);
-                return res.status(400).send();
+app.put('/item', (req, res) => {
+    const id = req.body.id;
+    const { name, price} = req.body;
+    connection.query(
+        "UPDATE product SET name = ?, price = ? WHERE id = ? ", [name, price, id ], (err, results, fields) => {
+            if(err) {
+                console.log("error occurred while updating item:", err);
+                throw err;
             }
-            res.status(200).json(results);
-        });
-    }
-    catch(err){
-        console.log(err);
-        return res.status(500).send();
-    }
-});
+            res.json({ name, price});
+        }
+    );
+})
 
-//updating a user
-app.patch("/update", async (req, res) => {
-    const email = req.body.email;
-    const newPassword = req.body.newPassword;
 
-    try{
-        connection.query(
-            "UPDATE users SET password = ? WHERE email = ?", [newPassword, email], (err, results, fields) => {
-                if(err){
-                    console.log(err);
-                    return res.status(400).send();
-                }
-                return res.status(200).json({message: 'user password updated successfully.'});
+app.delete('/item', (req, res) => {
+    const id = req.body.id;
+    connection.query(
+        "DELETE FROM product WHERE id = ?", [id], (err, results, fields) => {
+            if(err){
+                console.log("error while deleting item:", err);
+                throw err;
             }
-        );
-    }
-    catch(err){
-        console.log(err);
-        return res.status(500).send();
-    }
-});
+            res.json({success: true});
+        }
+    );
+})
 
-//delete a user
-app.delete("/delete", async (req, res) => {
-    const email = req.body.email;
+//routes and handlers for item completed
 
-    try{
-        connection.query(
-            "DELETE FROM users WHERE email = ?", [email], (err, results, fields) => {
-                if(err){
-                    console.log(err);
-                    return res.status(400).send();
-                }
-                if(results.affectedRows == 0) {
-                    return res.status(404).json({message: 'no user with that email.'});
-                }
-                return res.status(200).json({message: 'user delete successfully.'});                
-            }
-        );
-    }
-    catch(err){
-        console.log(err);
-        return res.status(500).send();
-    }
-});
+//reading all users from the db
+// app.get("/read", async (req, res) => {
+//     try{
+//         connection.query("SELECT * FROM users", (err, results, fields) => {
+//             if(err) {
+//                 console.log(err);
+//                 return res.status(400).send();
+//             }
+//             res.status(200).json(results);
+//         });
+//     }
+//     catch(err){
+//         console.log(err);
+//         return res.status(500).send();
+//     }
+// });
+
+// //reading specific users from the db
+// app.get("/read/single", async(req, res) => {
+//     const email = req.body.email;
+
+//     try{
+//         connection.query("SELECT * FROM users WHERE email = ?", [email], (err, results, fields) => {
+//             if(err)
+//             {
+//                 console.log(err);
+//                 return res.status(400).send();
+//             }
+//             res.status(200).json(results);
+//         });
+//     }
+//     catch(err){
+//         console.log(err);
+//         return res.status(500).send();
+//     }
+// });
+
+// //updating a user
+// app.patch("/update", async (req, res) => {
+//     const email = req.body.email;
+//     const newPassword = req.body.newPassword;
+
+//     try{
+//         connection.query(
+//             "UPDATE users SET password = ? WHERE email = ?", [newPassword, email], (err, results, fields) => {
+//                 if(err){
+//                     console.log(err);
+//                     return res.status(400).send();
+//                 }
+//                 return res.status(200).json({message: 'user password updated successfully.'});
+//             }
+//         );
+//     }
+//     catch(err){
+//         console.log(err);
+//         return res.status(500).send();
+//     }
+// });
+
+// //delete a user
+// app.delete("/delete", async (req, res) => {
+//     const email = req.body.email;
+
+//     try{
+//         connection.query(
+//             "DELETE FROM users WHERE email = ?", [email], (err, results, fields) => {
+//                 if(err){
+//                     console.log(err);
+//                     return res.status(400).send();
+//                 }
+//                 if(results.affectedRows == 0) {
+//                     return res.status(404).json({message: 'no user with that email.'});
+//                 }
+//                 return res.status(200).json({message: 'user delete successfully.'});                
+//             }
+//         );
+//     }
+//     catch(err){
+//         console.log(err);
+//         return res.status(500).send();
+//     }
+// });
 
