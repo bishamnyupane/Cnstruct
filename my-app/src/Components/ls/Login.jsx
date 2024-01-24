@@ -97,16 +97,7 @@ const Login = ({ onToggle }) => {
       <div className='forget-password'>
         Forget Password?<span>Click Here!</span>
       </div>
-      <div className='submit-container'>
-        <Link to="/Signup" className='submit gray' onClick={() => onToggle('Signup')}>
-          Sign Up
-        </Link>
-        <Link to="/Login" className='submit' onClick={() => onToggle('Login')}>
-          </Link> 
-        {/* </div> */}
-          <Link to="/Login" className='submit' onClick={() => onToggle('Login')}>
-
-        </Link> 
+      <div className='submit-container'>  
         <Link to="/Login" className='submit' onClick={() => onToggle('Login')}>
 
           Login
