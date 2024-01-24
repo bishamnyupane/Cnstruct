@@ -24,61 +24,61 @@ const ProductDetails = () => {
       name: "Cements",
       price: "700",
       imageUrl: cements,
-      description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde nisi vitae asperiores et mollitia saepe...",
+      description: "It is typically composed of finely ground clinker, mixed with gypsum and other additives ,creating a paste that hardens over time to provide strength and durability to various structures",
     },
     2: {
       name: "Fill Face Shuttering Plywood 32 Sq. Ft.: 18 mm",
       price: "6000",
       imageUrl: fillfaces,
-      description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde nisi vitae asperiores et mollitia saepe...",
+      description: "The Fill Face Shuttering Plywood, measuring 32 sq. ft. and 18 mm in thickness, is a robust and durable material specifically designed for use in construction shuttering applications. With its sturdy 18 mm thickness, it provides stability and support, making it ideal for creating formwork in concrete structures during the construction process....",
     },
     3: {
       name: "Jagdamba: TMT Thermex Steel Bar 12MM",
       price: "150",
       imageUrl: jagadamba,
-      description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde nisi vitae asperiores et mollitia saepe...",
+      description: "Jagdamba's TMT Thermex Steel Bar with a diameter of 12mm is a high-quality construction material known for its strength and resilience. Engineered through advanced Thermex technology, it ensures superior toughness and corrosion resistance, making it a reliable choice for reinforcing concrete structures.",
     },
     4: {
       name: "Square Steel Pipe 20 Ft: 4",
       price: "8000",
       imageUrl: square,
-      description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde nisi vitae asperiores et mollitia saepe...",
+      description: " A 20-foot square steel pipe, quantity of 4, is a versatile and durable construction material suitable for various structural applications.",
     },
     5: {
       name: "MS Pipe 1.5X20",
       price: "2000",
       imageUrl: mspipe,
-      description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde nisi vitae asperiores et mollitia saepe...",
+      description: "This Mild Steel (MS) pipe with dimensions 1.5 inches in diameter and 20 feet in length is commonly used in construction for its strength and adaptability.      ",
     },
     6: {
       name: "Angle 50X50X5inches",
       price: "2600",
       imageUrl: angle,
-      description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde nisi vitae asperiores et mollitia saepe...",
+      description: "The 50x50x5 inches steel angle is a sturdy structural component widely used in construction for providing support and reinforcement to various building elements. ",
     },
     7: {
       name: "CGI Sheets (Jasta) 0.35 mm Plain 12 ft.",
       price: "2304",
       imageUrl: cgi,
-      description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde nisi vitae asperiores et mollitia saepe...",
+      description: " Jasta CGI sheets, 0.35 mm thick and 12 feet in length, are plain galvanized iron sheets suitable for roofing and cladding applications, offering durability and weather resistance",
     },
     8: {
       name: "Bentonite Powder: 40KG",
       price: "1330",
       imageUrl: bento,
-      description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde nisi vitae asperiores et mollitia saepe...",
+      description: "Bentonite powder, weighing 40 kilograms, is utilized in construction for its unique swelling and sealing properties, commonly used in foundation and drilling applications.      ",
     },
     9: {
       name: "Construction Props: 11 Ft",
       price: "1500",
       imageUrl: propsImage,
-      description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde nisi vitae asperiores et mollitia saepe...",
+      description: " 11 Ft - Construction props, with a height of 11 feet, are adjustable support tools used to temporarily support structures during construction, providing stability and safety",
     },
     10: {
       name: "Fomtite (Tierod)",
       price: "200",
       imageUrl: fontite,
-      description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde nisi vitae asperiores et mollitia saepe...",
+      description: "  Fomtite tierods are construction components used for anchoring and securing formwork in concrete structures, ensuring stability and integrity during the construction process.",
     },
   };
 
@@ -97,7 +97,7 @@ const ProductDetails = () => {
       <div className="single-pro-details">
         <h1>{name}</h1>
         <h2>Rs.{price}</h2>
-        <h4>Product Details</h4>
+        {/* <h4>Product Details</h4> */}
         <span>{description}</span>
 
         <Link to="/">Go Back</Link>
@@ -107,37 +107,4 @@ const ProductDetails = () => {
 };
 
 export default ProductDetails;
-
-
-// import React from 'react';
-// import { Link, useLocation, useNavigate } from 'react-router-dom';
-// import './ProductDetails.css';
-
-// const ProductDetails = () => {
-//   const { search } = useLocation();
-//   const params = new URLSearchParams(search);
-//   const name = params.get('name');
-//   const price = params.get('price');
-//   const navigate = useNavigate();
-
-//   if (!name || !price) {
-//     navigate('/');
-//     return null;
-//   }
-
-//   return (
-//     <section id="prodetails" className="section-p1">
-//       <div className="single-pro-details">
-//         <h4>{name}</h4>
-//         <h2>Rs.{price}</h2>
-
-//         <Link to="/">Go Back</Link>
-//       </div>
-//     </section>
-//   );
-// };
-
-// export default ProductDetails;
-
-// ProductDetails.jsx
 

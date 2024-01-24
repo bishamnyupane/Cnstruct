@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React,{useState} from 'react';
 
 import './Home.css';
 
@@ -18,7 +18,7 @@ import fillfaces from '../../assets/fillfaces.png';
 import Card from './Card';
 import Cart from './Cart';
 
-const Home = ({ addToCart,cartItems, setCartItems  }) => {
+const Home = ({ addToCart }) => {
   
 
   return (
@@ -47,26 +47,5 @@ const Home = ({ addToCart,cartItems, setCartItems  }) => {
     </div>
      );
     };
-  
-  
-{/* 
-      <section className="card-container">
-        <Card id={1} name="Cements" price={700} image={cements} addToCart={addToCart} />
-        <Card id={2} name="Fill Face Shuttering Plywood 32 Sq. Ft.: 18 mm" price={6000} image={fillfaces} addToCart={addToCart} />
-        <Card id="3" name="Jagdamba: TMT Thermex Steel Bar 12MM" price="150" image={jagadamba} addToCart={addToCart} />
-        <Card id="4" name="Square Steel Pipe 20 Ft: 4" price="8000" image={square} addToCart={addToCart} />
-        <Card id="5" name="MS Pipe 1.5X20 " price="2000" image={mspipe} addToCart={addToCart} />
-        <Card id="6" name="Angle 50X50X5inches" price="2600" image={angle} addToCart={addToCart} />
-        <Card id="7" name="CGI Sheets (Jasta) 0.35 mm Plain 12 ft." price="2304" image={cgi} addToCart={addToCart} />
-        <Card id="8" name="Bentonite Powder: 40KG" price="1330" image={bento} addToCart={addToCart} />
-        <Card id="9" name="Construction Props: 11 Ft" price="1500" image={props} addToCart={addToCart} />
-        <Card id="10" name="Fomtite (Tierod)" price="200" image={fontite} addToCart={addToCart} />
-        Add other Card components similarly
-      </section> */}
-
-   
-
-
-
 
 export default Home;

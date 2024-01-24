@@ -62,6 +62,8 @@ const Login = ({ onToggle }) => {
   
 
   return (
+
+
     <div className='container'>
       <div className='header'>
         <div className='text'>Login</div>
@@ -100,10 +102,18 @@ const Login = ({ onToggle }) => {
           Sign Up
         </Link>
         <Link to="/Login" className='submit' onClick={() => onToggle('Login')}>
+          </Link> 
+        {/* </div> */}
+          <Link to="/Login" className='submit' onClick={() => onToggle('Login')}>
+
+        </Link> 
+        <Link to="/Login" className='submit' onClick={() => onToggle('Login')}>
+
           Login
         </Link>
       </div>
     </div>
+    
   );
 };
 

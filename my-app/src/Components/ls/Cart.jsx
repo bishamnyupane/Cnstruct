@@ -1,10 +1,10 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { BsFillBagHeartFill } from 'react-icons/bs';
 import { CiCircleRemove } from 'react-icons/ci';
 import './Cart.css';
 
   const Cart = ({ cartItems , setCartItems}) => {
-    
     const handleQuantityChange = (itemId, newQuantity) => {
       newQuantity = Math.max(0, newQuantity);
       const updatedCart = cartItems.map((item) => (item.id === itemId ? { ...item, quantity: newQuantity } : item));
@@ -20,6 +20,12 @@ import './Cart.css';
 
   const calculateSubtotal = () => {
     return cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+  };
+
+
+  const handleProceedToCheckout = () => {
+    // Navigate to Pay component with cart items
+    navigate('/pay', { state: { cartItems } });
   };
 
 
@@ -85,7 +91,7 @@ import './Cart.css';
               </td>
             </tr>
           </table>
-          <button className="normal">Proceed to checkout</button>
+          <button className="normal" onClick={handleProceedToCheckout}>Proceed to checkout</button>
         </div>
       </section>
     </div>
