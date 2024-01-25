@@ -1,5 +1,8 @@
 const { json } = require('express');
+const { json } = require('express');
 const connection = require('../server');
+
+//fetch all items in the cart for displaying in the frontend
 
 //fetch all items in the cart for displaying in the frontend
 

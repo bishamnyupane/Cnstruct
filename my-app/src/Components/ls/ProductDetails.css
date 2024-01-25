@@ -59,7 +59,12 @@
   }
   
   .single-pro-details h2 {
-    margin: 10px 0;
+    font-size: 1.2em;
+    margin-bottom: 20px;  }
+
+  .single-pro-details h1 {
+    font-size: 2em;
+    font-weight: bold;
   }
   
   .single-pro-details select,
@@ -71,6 +76,7 @@
   .single-pro-details span {
     display: block;
     margin-bottom: 20px;
+    font-size: 1em;
   }
   
   /* Link to go back to Home */

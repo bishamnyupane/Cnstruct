@@ -19,14 +19,14 @@ import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   const [openMenu, setOpenMenu] = useState(false);
-
+  
   const menuOptions = [
     {
       text: 'Home',
     },
-    {
-      text: 'Shop',
-    },
+    // {
+    //   text: 'Shop',
+    // },
     {
       text: 'About',
     },
@@ -34,16 +34,28 @@ const Navbar = () => {
       text: 'Cart',
       icon: <ShoppingCartRoundedIcon />,
     },
+    {
+      text: 'Login',
+      route: '/login',
+    },
+    {
+      text: 'Signup',
+      route: '/signup', 
+    },
   ];
+
+  
 
   return (
     <nav>
       <div className="navbar-logo-container">
+        <Link to="/home">
         <img src={logo_light} alt="" />
+        </Link>
       </div>
       <div className="navbar-links-container">
         <Link to="/Home">Home</Link>
-        <Link to="/shop">Shop</Link>
+        {/* <Link to="/shop">Shop</Link> */}
         <Link to="/about">About</Link>
         <Link to="/Cart">
           <BsCart2 className="navbar-cart-icon" />Cart
@@ -89,10 +101,12 @@ const Navbar = () => {
           <List>
           {menuOptions.map((item) => (
               <ListItem key={item.text} disablePadding>
+                                <Link to={`/${item.text.toLowerCase()}`} style={{ textDecoration: 'none', color: 'inherit' }}>
                     <ListItemButton>
                       {item.icon && <ListItemIcon>{item.icon}</ListItemIcon>}
                       <ListItemText primary={item.text} />
                     </ListItemButton>
+                    </Link>
                   </ListItem>
                 ))}
           </List>
