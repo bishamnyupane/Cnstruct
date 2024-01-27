@@ -1,0 +1,151 @@
+
+  .box1 {
+   
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+  }
+  
+  h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .xy th {
+    background-color: #f2f2f2;
+  }
+  
+  .pq {
+    font-size: 18px;
+    margin-top: 0;
+  }
+  
+  .form-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 15px;
+  }
+  
+  .personal-info-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+  
+  .personal-info-table td {
+    padding: 3px;
+    /* border: 1px solid #ddd; */
+  }
+  
+  .personal-info-table label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .personal-info-table input {
+    width: 100%;
+    padding: 3px;
+ 
+    margin-top: 4px;
+    margin-bottom: 8px;
+  }
+  
+  .ef {
+    font-size: 20px;
+    margin-top: 20px;
+  }
+  
+  .payment-options {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .payment-options label {
+    margin-bottom: 10px;
+  }
+  
+  .ij, .kl {
+    margin-top: 20px;
+  }
+  
+ 
+  .po {
+    background-color: #4caf50;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    margin-top: 20px;
+  }
+  
+  .po:hover {
+    background-color: #45a049;
+  }
+
+  #directBankDetails {
+    display: none;
+  }
+  
+  #directBankDetails img {
+    max-width: 100%;
+    max-height: 300px;
+  }
+
+ 
+#directBankDetails {
+  margin-top: 20px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  background-color: #f9f9f9;
+}
+
+#directBankDetails p {
+  margin: 5px 0;
+}
+
+#directBankDetails img {
+  max-width: 100%;
+  height: auto;
+  margin-top: 10px;
+}
+
+.file-upload {
+  margin-top: 20px;
+}
+
+.file-label {
+  background-color: red;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  display: inline-block;
+}
+
+#file-input {
+  display: none; 
+}
+
+.uploaded-file {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.uploaded-file span {
+  margin-right: 10px;
+}
+
+.remove-file {
+  color: #ff0000;
+  cursor: pointer;
+}
+
+/* Optional: Style for hiding the file input label when a file is uploaded */
+/* #file-input:not(:focus) + .file-label {
+  display: none;
+} */

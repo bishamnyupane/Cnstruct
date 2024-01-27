@@ -4,10 +4,13 @@ import Login from './Components/ls/Login';
 import Signup from './Components/ls/Signup';
 import Home from './Components/ls/Home';
 import Cart from './Components/ls/Cart';
+import About from './Components/ls/About';
+// import Shop from './Components/ls/Shop';
 import Card from './Components/ls/Card';
+import Pay from './Components/ls/Pay';
 import ProductDetails from './Components/ls/ProductDetails';
 import { BrowserRouter as Router, Routes, Route,Link ,useNavigate} from 'react-router-dom';
-
+import Footer from './Components/Footer/Footer';
 function App() {
 
   const [currentOption, setCurrentOption] = useState('Login');
@@ -39,10 +42,17 @@ function App() {
         <Route path="/Home" element={<Home addToCart={addToCart} cartItems={cartItems} setCartItems={setCartItems} />} />
           <Route path="/Login" element={<Login/>}/>
           <Route path="/Signup" element={<Signup/>}/>
+          <Route path="/About" element={<About/>} />
+          {/* <Route path="/Shop" element={<Shop/>} /> */}
+
+
           <Route path="/Cart" element={<Cart cartItems={cartItems} setCartItems={setCartItems} />} />
+          <Route path="/Pay" Component={Pay}/>
           <Route path="/product/:productId" element={<ProductDetails onAddToCart={addToCart} />} />
-          <Route path="/" element={<Home addToCart={addToCart} cartItems={cartItems} setCartItems={setCartItems} />} />          
+          <Route path="/" element={<Home addToCart={addToCart} cartItems={cartItems} setCartItems={setCartItems} />} />   
+
         </Routes>
+        <Footer/>
         </div>
     </Router>
   );

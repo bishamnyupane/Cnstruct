@@ -1,7 +1,9 @@
 const jwt = require('jsonwebtoken');
 const config = require('config');
 const bcrypt = require('bcrypt');
-const connection = require('../server');
+const pool = require('../db');
+
+const connection = await pool.getConnection();
 
 module.exports.signup = (req, res) => {
     const { name, email, password, address, phone, dob } = req.body;
@@ -9,7 +11,7 @@ module.exports.signup = (req, res) => {
     if( !name || !email || !password || !address || !phone || !dob ){
         res.status(400).json({msg: "Please enter all fields"});
     }
-
+    
     connection.query(
             "SELECT * FROM users WHERE email = ?", [email], (err, results, field) => {
                 if(err)
