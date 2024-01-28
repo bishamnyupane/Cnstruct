@@ -259,30 +259,29 @@ app.get('/item', (req, res) => {
 })
 
 app.post('/item', (req, res) => {
-    const { name, price } = req.body;
-    const newItem = { name, price };
+    const { id, name, price, category, description } = req.body;
     connection.query(
-        "INSERT INTO product (name, price) VALUES (?, ?)", [name, price], (err, results, fields) => {
+        "INSERT INTO product (name, price, id, category, description) VALUES (?, ?)", [name, price, id, category, description], (err, results, fields) => {
             if(err) {
                 console.log("error while inserting item:", err);
                 throw err;
             }
-            res.json(newItem);
+            return res.json({ name, price, id, category, description});
         }
     );
     
 })
 
 app.put('/item', (req, res) => {
-    const id = req.body.id;
-    const { name, price} = req.body;
+    const reqId = req.body.id;
+    const { name, price, id, category, description} = req.body;
     connection.query(
-        "UPDATE product SET name = ?, price = ? WHERE id = ? ", [name, price, id ], (err, results, fields) => {
+        "UPDATE product SET name = ?, price = ?, id = ?, category = ?, description = ? WHERE id = ? ", [name, price, id, category, description, reqId ], (err, results, fields) => {
             if(err) {
                 console.log("error occurred while updating item:", err);
                 throw err;
             }
-            res.json({ name, price});
+            return res.json({ name, price, id, category, description});
         }
     );
 })

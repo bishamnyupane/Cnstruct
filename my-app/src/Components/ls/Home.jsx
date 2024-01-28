@@ -1,10 +1,5 @@
-
-import React,{useState} from 'react';
-
+import React from 'react';
 import './Home.css';
-
-import { Link, useNavigate } from 'react-router-dom';
-import { BsFillBagHeartFill } from 'react-icons/bs';
 import cements from '../../assets/cements.png';
 import angle from '../../assets/angle.png';
 import bento from '../../assets/bento.png';
@@ -16,7 +11,6 @@ import props from '../../assets/props.png';
 import square from '../../assets/squre.png';
 import fillfaces from '../../assets/fillfaces.png';
 import Card from './Card';
-import Cart from './Cart';
 
 const Home = ({ addToCart }) => {
   

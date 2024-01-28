@@ -1,6 +1,8 @@
 import React from 'react';
 import { BsFillBagHeartFill } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
+
+
 const Card = ({ id, name, price, image, addToCart }) => {
   
 

@@ -6,10 +6,9 @@ import Home from './Components/ls/Home';
 import Cart from './Components/ls/Cart';
 import About from './Components/ls/About';
 // import Shop from './Components/ls/Shop';
-import Card from './Components/ls/Card';
 import Pay from './Components/ls/Pay';
 import ProductDetails from './Components/ls/ProductDetails';
-import { BrowserRouter as Router, Routes, Route,Link ,useNavigate} from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Footer from './Components/Footer/Footer';
 function App() {
 
