@@ -16,8 +16,6 @@ const Login = ({ onToggle }) => {
   const [emailError, setEmailError] = useState('');
 
   const navigate = useNavigate(); // Import useNavigate
-;
-
 
   const handleTogglePassword = () => {
     setShowPassword(!showPassword);
@@ -62,7 +60,7 @@ const Login = ({ onToggle }) => {
     //   return;
 
   try{
-    axios.post('http://localhost:3001/login', {
+    return axios.post('http://localhost:3001/login', {
       email: email,
       password: password
     }).then( (response) => {

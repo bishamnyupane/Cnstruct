@@ -73,20 +73,15 @@ app.post("/register", async (req, res) => {
                                 return res.status(400).send();
                             }
                             return res.status(201).send("user created successfully");
-
-                        })
-                    
+                        })                    
                 });
             });
-
             }
         );
     } catch(err){
         console.log(err);
         return res.status(500).send();
     }
-
-
 });
 
 //login route
