@@ -1,65 +1,82 @@
-import React, { useState ,useEffect} from 'react';
+import React, { useState ,useEffect } from 'react';
 import { Link ,useNavigate} from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 import email_icon from '../../assets/email.png';
 import password_icon from '../../assets/password.png';
-import Cookies from 'js-cookie'
 import axios from 'axios';
-import  {jwtDecode} from 'jwt-decode';
 
 const Login = ({ onToggle }) => {
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
+  const [emailError, setEmailError] = useState('');
+
   const navigate = useNavigate(); // Import useNavigate
-  const LoginResponse =useState("string");
+;
+
+
   const handleTogglePassword = () => {
     setShowPassword(!showPassword);
   };
 
-  const handleLoginClick = async (event) => {
-    event.preventDefault()
+  const onEmailChange = (e) => { 
+    setEmail(e.target.value); 
+    setEmailError(''); 
+  }
 
-    // Validate if the email ends with "ncit.edu.np"
-    const isGmail = /@ncit.edu\.np$/.test(email);
+  const onPasswordChange = (e) => { 
+    setPassword(e.target.value); 
+    setPasswordError('');
+   }
 
-    if (!isGmail) {
-      setEmailError('Please enter a valid college email');
-      return
+  const handleLoginClick = async () => {
+
+    if(!email && !password){
+      setEmailError("Please provide an email");
+      setPasswordError("Please provide a password");
+      return;
     }
-    if(!password.trim()){
-      setPasswordError('Please enter your password');
+    else if(!password){
+      setPasswordError("Please provide a password");
+      return;
+    }
+    else if(!email){
+      setEmailError("Please provide an email");
       return;
     }
 
-    try {
-      const response = await axios.post<LoginResponse>('http://localhost:3000/Login', {
-        emailID: email,
-        password: password,
-      })
+    // let passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    let emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-      localStorage.setItem('token', response.data.token)
-
-      navigate('/dashboard')
-
-
-    } catch (error) {
-      console.error(error)
+    if(!emailRegex.test(email)){
+      setEmailError("Please provide a valid email");
+      return;
     }
 
-  };
+    // if(!passwordRegex.test(password)){
+    //   setPasswordError("At Least: 8 Characters, 1 Uppercase, 1 Lowercase, 1 Digit, 1 Special Character.");
+    //   return;
 
-  useEffect(() => {
-    const token = localStorage.getItem('token')
-    if (token) {
-      navigate('/dashboard')
-    }
-  },[navigate])
-  
+  try{
+    axios.post('http://localhost:3001/login', {
+      email: email,
+      password: password
+    }).then( (response) => {
+      if(response.data.token) {
+        localStorage.setItem('userObject', JSON.stringify(response.data));
+      }
+    }).then( () => {
+      navigate("/home");
+      window.location.reload();
+    })
+  } catch(err){
+    console.error("error making a post request:", err);
+  }
+  }
 
   return (
 
@@ -76,7 +93,7 @@ const Login = ({ onToggle }) => {
             type="text"
             className="username-input-box"
             value={email}
-            onChange={(e) => { setEmail(e.target.value); setEmailError(''); }}
+            onChange = {onEmailChange}
           />
           {emailError && <div className="email-error">{emailError}</div>}
         </div>
@@ -86,7 +103,7 @@ const Login = ({ onToggle }) => {
             type={showPassword ? 'text' : 'password'}
             className="password-input-box"
             value={password}
-            onChange={(e) => { setPassword(e.target.value); setPasswordError(''); }}
+            onChange = {onPasswordChange}
           />
           <div className="toggle-password" onClick={handleTogglePassword}>
             <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
@@ -98,13 +115,13 @@ const Login = ({ onToggle }) => {
         Forget Password?<span>Click Here!</span>
       </div>
       <div className='submit-container'>  
-        <Link to="/Login" className='submit' onClick={() => onToggle('Login')}>
+        <Link to="/Login" className='submit' onClick={handleLoginClick}>
 
           Login
         </Link>
       </div>
     </div>
-    
+  
   );
 };
 

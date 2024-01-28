@@ -5,10 +5,22 @@ const mysql = require('mysql');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const auth = require('./middleware/auth');
+const cors = require('cors');
+
+const corsOptions = {
+    origin: ['http://localhost:3000', "http://localhost:3001"],
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
+    optionsSuccessStatus: 204,
+};
 
 //creating an instance of express and setting up a middleware to parse JSON in requests
 const app = express();
 app.use(express.json());
+
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
+
 app.listen(3001, () => console.log('server running on port 3001'));
 
 const connection = mysql.createConnection({
@@ -30,9 +42,9 @@ connection.connect((err) => {
 //register
 app.post("/register", async (req, res) => {
     //destructuring
-    const { name, email, password, address, phone, dob } = req.body;
+    const { name, email, password, address, phone } = req.body;
 
-    if( !name || !email || !password || !address || !phone || !dob ){
+    if( !name || !email || !password || !address || !phone ){
         return res.status(400).json({msg: "Please enter all fields"});
     }
 
@@ -55,30 +67,12 @@ app.post("/register", async (req, res) => {
                          return;
                     }
         
-                    connection.query("INSERT INTO users (fullName, email, password, address, phone, dob) VALUES (?, ?, ?, ?, ?, ?)", [name, email, hash, address, phone, dob], (err, results, fields) => {
+                    connection.query("INSERT INTO users (fullName, email, password, address, phone) VALUES (?, ?, ?, ?, ?)", [name, email, hash, address, phone], (err, results, fields) => {
                             if(err){
                                 console.log("error while inserting user", err);
                                 return res.status(400).send();
                             }
-
-                            jwt.sign(
-                                { email: email },
-                                config.get('jwtsecret'),
-                                { expiresIn: 3600 },
-                                (err, token) => {
-                                    if(err){
-                                        console.log("error generating jwt", err);
-                                    }
-                                    return res.json({
-                                        token,
-                                        customer: {
-                                            name: name,
-                                            email: email
-                                        }
-                                    });
-                                }
-                            );
-        
+                            return res.status(201).send("user created successfully");
 
                         })
                     
@@ -122,7 +116,7 @@ app.post('/login', async (req, res) => {
 
             jwt.sign(
                 { email: user.email },
-                config.get('jwtsecret'),
+                config.get('jwtUserSecret'),
                 { expiresIn: 3600 },
                 (err, token) => {
                     if(err) throw err;
