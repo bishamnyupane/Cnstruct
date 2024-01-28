@@ -49,7 +49,7 @@ const getCurrentUser = () => {
 };
 
 const logOut = () => {
-  localStorage.removeItem("user");
+  localStorage.removeItem("userObject");
   setCurrentUser(undefined);
 };
 
