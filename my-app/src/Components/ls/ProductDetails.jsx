@@ -16,7 +16,6 @@ import fillfaces from '../../assets/fillfaces.png';
 
 const ProductDetails = () => {
   const { productId } = useParams();
-  const navigate = useNavigate();
   
 
   const productDetails = {
@@ -48,7 +47,7 @@ const ProductDetails = () => {
       name: "MS Pipe 1.5X20",
       price: "2000",
       imageUrl: mspipe,
-      description: "This Mild Steel (MS) pipe with dimensions 1.5 inches in diameter and 20 feet in length is commonly used in construction for its strength and adaptability.      ",
+      description: "This Mild Steel (MS) pipe with dimensions 1.5 inches in diameter and 20 feet in length is commonly used in construction for its strength and adaptability.",
     },
     6: {
       name: "Angle 50X50X5inches",
@@ -66,7 +65,7 @@ const ProductDetails = () => {
       name: "Bentonite Powder: 40KG",
       price: "1330",
       imageUrl: bento,
-      description: "Bentonite powder, weighing 40 kilograms, is utilized in construction for its unique swelling and sealing properties, commonly used in foundation and drilling applications.      ",
+      description: "Bentonite powder, weighing 40 kilograms, is utilized in construction for its unique swelling and sealing properties, commonly used in foundation and drilling applications.",
     },
     9: {
       name: "Construction Props: 11 Ft",

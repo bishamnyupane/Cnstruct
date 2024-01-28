@@ -21,6 +21,9 @@ app.use(express.json());
 app.use(cors(corsOptions));
 app.options('*', cors(corsOptions));
 
+//making images available
+app.use('/productImages', express.static('productImages'));
+
 app.listen(3001, () => console.log('server running on port 3001'));
 
 const connection = mysql.createConnection({
@@ -115,7 +118,7 @@ app.post('/login', async (req, res) => {
                 { expiresIn: 3600 },
                 (err, token) => {
                     if(err) throw err;
-                    res.json({
+                    return res.json({
                         token,
                         user: {
                             name: user.fullName,
@@ -137,7 +140,7 @@ app.get('/user', auth, (req, res) => {
             if(err) throw err;
             const user = results[0];
             delete user.password;
-            res.json(user);
+            return res.json(user);
         }]
     )
 
@@ -160,15 +163,15 @@ app.get('/cart', async (req, res) => {
             //if a cart exists for the user and cart is non-empty then return the cart, else return null
 
             if(results.length>0){
-                res.send(results);
+                return res.send(results);
             }
             else{
-                res.send(null);
+                return res.send(null);
             }
         });
     } catch(err){
         console.log(err);
-        res.status(500).send("something went wrong");
+        return res.status(500).send("something went wrong");
     }
 } )
 
@@ -215,7 +218,7 @@ app.post('/cart', async (req, res) => {
         })
     } catch(err){
         console.log(err);
-        res.status(500).send("something went wrong");
+        return res.status(500).send("something went wrong");
     }
 })
 
@@ -240,7 +243,7 @@ app.delete('/cart', async (req, res) => {
         })
     } catch (err) {
         console.log(err);
-        res.status(500).send("something went wrong");
+        return res.status(500).send("something went wrong");
     }
 })
 
@@ -253,7 +256,7 @@ app.get('/item', (req, res) => {
         "SELECT * FROM product",
         (err, results, fields) => {
             if(err) throw err;
-            res.json(results);
+            return res.json(results);
         }
     );
 })
@@ -295,10 +298,12 @@ app.delete('/item', (req, res) => {
                 console.log("error while deleting item:", err);
                 throw err;
             }
-            res.json({success: true});
+            return res.json({success: true});
         }
     );
 })
+
+
 
 //routes and handlers for item completed
 
