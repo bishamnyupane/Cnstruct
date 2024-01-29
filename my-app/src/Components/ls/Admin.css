@@ -1,0 +1,139 @@
+.ad {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+  max-width: 300px;
+  max-height: 400px;
+  overflow: hidden;
+  align-items: center;
+}
+.ad:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.card-img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.card-details {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.card-title {
+  margin: 0;
+  font-size: 18px;
+}
+
+.card-price {
+  font-weight: bold;
+  color: #007bff;
+  margin-top: 5px;
+}
+
+.remove-item {
+  cursor: pointer;
+  color: #dc3545;
+  margin-top: 10px;
+}
+
+.remove-item:hover {
+  color: #c82333;
+}
+
+.this {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+  padding: 10px 20px;
+  background-color: orange;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.input-form {
+  margin-left: 40px;
+}
+
+.input-field {
+  margin-bottom: 10px;
+}
+
+.add-product-btn {
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add-product-btn:hover {
+  background-color: #45a049;
+}
+
+.add-product-btn:active {
+  background-color: #3e8e41;
+}
+
+.add-product-btn span {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.input-field {
+  width: 150px;
+  margin-bottom: 10px;
+}
+
+.input-field input[type="text"],
+.input-field input[type="number"] {
+  border: none;
+  border-bottom: 1px solid #ccc;
+  padding: 5px;
+  outline: none;
+}
+
+.input-field input[type="text"]:focus,
+.input-field input[type="number"]:focus {
+  border-bottom: 1px solid #007bff;
+}
+
+.input-field input[type="file"]:focus {
+  border-bottom: 1px solid #007bff;
+}
+.input-field input[type="file"] {
+  border: none;
+  border-bottom: 1px solid #ccc;
+  padding: 5px;
+  outline: none;
+}
+
+.card-container {
+  display: flex;
+  padding: 5px;
+  justify-content: center;
+  align-items: center;
+}
+
+.product-card {
+  margin-right: 20px;
+}
+
+.admin-wrapper {
+  margin-left: 20px;
+}

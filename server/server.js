@@ -24,10 +24,10 @@ app.options('*', cors(corsOptions));
 app.listen(3001, () => console.log('server running on port 3001'));
 
 const connection = mysql.createConnection({
-    host: '172.19.64.1',
-    database: 'cnstrct',
+    host: '127.0.0.1',
+    database: 'cnstruct',
     user: 'root',
-    password: 'root123'
+    password: ''
 });
 
 //connecting to the database using the above credentials
@@ -103,11 +103,29 @@ app.post('/login', async (req, res) => {
          }
 
          const user = results[0];
-
          //validate password
          bcrypt.compare(password, user.password)
          .then(isMatch => {
             if(!isMatch) return res.status(400).json({msg:'Invalid credentials'});
+
+            if (user.email === 'admin@gmail.com' && user.password === 'admin') {
+                jwt.sign(
+                    { email: user.email },
+                    config.get('jwtAdminSecret'), 
+                    { expiresIn: 3600 },
+                    (err, token) => {
+                        if (err) throw err;
+                        res.json({
+                            token,
+                            user: {
+                                name: user.fullName,
+                                email: user.email,
+                                role: 'admin' 
+                            }
+                        });
+                    }
+                );
+            }
 
             jwt.sign(
                 { email: user.email },
@@ -124,7 +142,8 @@ app.post('/login', async (req, res) => {
                     });
                 }
             )
-         })
+         }
+         )
         }
     );
 } )

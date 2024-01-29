@@ -5,6 +5,7 @@ import Signup from './Components/ls/Signup';
 import Home from './Components/ls/Home';
 import Cart from './Components/ls/Cart';
 import About from './Components/ls/About';
+import Admin from './Components/ls/Admin';
 // import Shop from './Components/ls/Shop';
 import Card from './Components/ls/Card';
 import Pay from './Components/ls/Pay';
@@ -43,6 +44,8 @@ function App() {
           <Route path="/Login" element={<Login/>}/>
           <Route path="/Signup" element={<Signup/>}/>
           <Route path="/About" element={<About/>} />
+          <Route path="/Admin" element={<Admin/>} />
+
           {/* <Route path="/Shop" element={<Shop/>} /> */}
 
 

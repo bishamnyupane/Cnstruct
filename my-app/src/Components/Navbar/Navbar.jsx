@@ -30,6 +30,10 @@ const Navbar = () => {
     {
       text: 'About',
     },
+
+    {
+      text: 'Admin',
+    },
     {
       text: 'Cart',
       icon: <ShoppingCartRoundedIcon />,
@@ -42,6 +46,7 @@ const Navbar = () => {
       text: 'Signup',
       route: '/signup', 
     },
+
   ];
 
 const getCurrentUser = () => {
@@ -71,6 +76,8 @@ useEffect(() => {
         <Link to="/Home">Home</Link>
         {/* <Link to="/shop">Shop</Link> */}
         <Link to="/about">About</Link>
+        <Link to="/Admin">Admin</Link>
+
         <Link to="/Cart">
           <BsCart2 className="navbar-cart-icon" />Cart
         </Link>
