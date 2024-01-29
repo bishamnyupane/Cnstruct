@@ -4,7 +4,7 @@ import axios from 'axios';
 
 const Admin = () => {
 
-  const [product, setProduct] = useState({ id: undefined, name: '', category: '', price: '', description: '', imageFile: null });
+  const [product, setProduct] = useState({ id: 0, name: '', category: '', price: '', description: '', imageFile: null });
 
   const handleInputChange = (e) => {
     const { name, value, files } = e.target;
@@ -15,11 +15,29 @@ const Admin = () => {
     }
   };
 
+  const handleFileUpload = async () => {
+    const file = product.imageFile;
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('id', product.id);
+    try{
+      const response = await axios.post('/upload', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+      console.log("response for image upload:", response);
+    } catch(err) {
+      return console.log("error uploading image file:", err);
+    }
+  }
+
   const handleAddProduct = async () => {
-    // if (!product.id || !product.name || !product.price || !product.description || !product.imageFile) {
-    //     alert('Please fill out all the   fields before adding the product.');
-    //     return;
-    // }
+    if (!product.id || !product.name || !product.price || !product.description || !product.imageFile) {
+        alert('Please fill out all the fields before adding the product.');
+        return;
+    }
+    await handleFileUpload();
     try {
         const response = await axios.post('http://localhost:3001/item', {
         id: product.id,
@@ -38,8 +56,9 @@ const Admin = () => {
   const handleDeleteProduct = async () => {
     try {
         const response = await axios.delete('http://localhost:3001/item', {
-        id: product.id
+        id : product.id
     });
+    console.log("id:", product.id);
     console.log("item deletion request response:", response);
     window.location.href="/home";
     } catch(error){
@@ -72,7 +91,7 @@ const Admin = () => {
         <h2 className="this">Add, Update and Delete Products</h2>
         <div className="input-field">
           <input
-            type="numeric"
+            type="string"
             name="id"
             placeholder="ID"
             value={product.id}

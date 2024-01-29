@@ -14,8 +14,8 @@ const Card = ({ id, name, price, image, addToCart, category }) => {
   </Link>
   <div className="card-details">
     <h3 className="card-title">{name}</h3>
-    <h4 clasName="card-title">Category:{category}</h4>
-    <h3 clasName="card-title">ID:{id}</h3>
+    <h6 >Category:{category}</h6>
+    <h4 >ID:{id}</h4>
     <section className="card-price">
       <div className="price">Rs. {price}</div>
 

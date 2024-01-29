@@ -1,11 +1,12 @@
 const express = require('express');
-// const path = require('path');
+const path = require('path');
 const config = require('config');
 const mysql = require('mysql');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const auth = require('./middleware/auth');
 const cors = require('cors');
+const multer = require('multer');
 
 const corsOptions = {
     origin: ['http://localhost:3000', "http://localhost:3001"],
@@ -25,6 +26,21 @@ app.options('*', cors(corsOptions));
 //making images available
 app.use('/productImages', express.static('productImages'));
 
+//configure multer
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'productImages/')
+    },
+    filename: function (req, file, cb) {
+        const fileExt = path.extname(file.originalname);
+        const id = req.body.id;
+        cb(null, `${id}${fileExt}`);
+    }
+});
+const upload = multer({ storage: storage});
+
+
+
 app.listen(3001, () => console.log('server running on port 3001'));
 
 const connection = mysql.createConnection({
@@ -42,6 +58,17 @@ connection.connect((err) => {
     }
     console.log("MySQL successfully connected");
 })
+
+//upload endpoint
+app.post('/upload', upload.single('file'), async (req, res) => {
+console.log(req);
+    try {
+        res.send({ message: "file uploaded successfully."});
+    } catch(err) {
+        console.log("error while uploading image:", err);
+        res.sendStatus(500);
+    }
+});
 
 //register
 app.post("/register", async (req, res) => {
@@ -301,6 +328,7 @@ app.delete('/item', (req, res) => {
                 console.log("error while deleting item:", err);
                 throw err;
             }
+            console.log("item deleted successfully");
             return res.json({success: true});
         }
     );
