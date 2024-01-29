@@ -61,7 +61,7 @@
   }
   
   .input-form {
-    margin-left: 40px;
+    margin-left: 5px;
   }
   
   .input-field {
@@ -136,4 +136,9 @@
   
   .admin-wrapper {
     margin-left: 20px;
+  }
+
+  .buttonDiv{
+    display:flex;
+    gap: 10px;
   }

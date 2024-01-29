@@ -26,7 +26,7 @@ const Home = ({ addToCart }) => {
 <div className="app">
 
   {items.map(item => (
-    <Card id={item.id} name={item.name} price={item.price} image={imagePath+item.id+".png"} addToCart={addToCart}/>
+    <Card key={item.id} id={item.id} name={item.name} category={item.category} price={item.price} image={imagePath+item.id+".png"} addToCart={addToCart}/>
     )
   )
 }   

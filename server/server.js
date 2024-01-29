@@ -9,13 +9,14 @@ const cors = require('cors');
 
 const corsOptions = {
     origin: ['http://localhost:3000', "http://localhost:3001"],
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    methods: ['GET','HEAD','PUT','PATCH','POST','DELETE'],
     credentials: true,
     optionsSuccessStatus: 204,
 };
 
 //creating an instance of express and setting up a middleware to parse JSON in requests
 const app = express();
+
 app.use(express.json());
 
 app.use(cors(corsOptions));
@@ -254,7 +255,7 @@ app.delete('/cart', async (req, res) => {
 
 //routes and handlers for item
 
-app.get('/item', (req, res) => {
+app.get('/item', async (req, res) => {
     connection.query(
         "SELECT * FROM product",
         (err, results, fields) => {
@@ -264,10 +265,10 @@ app.get('/item', (req, res) => {
     );
 })
 
-app.post('/item', (req, res) => {
+app.post('/item', async (req, res) => {
     const { id, name, price, category, description } = req.body;
     connection.query(
-        "INSERT INTO product (name, price, id, category, description) VALUES (?, ?)", [name, price, id, category, description], (err, results, fields) => {
+        "INSERT INTO product (name, price, id, category, description) VALUES (?, ?, ?, ?, ?)", [name, price, id, category, description], (err, results, fields) => {
             if(err) {
                 console.log("error while inserting item:", err);
                 throw err;
@@ -279,10 +280,9 @@ app.post('/item', (req, res) => {
 })
 
 app.put('/item', (req, res) => {
-    const reqId = req.body.id;
     const { name, price, id, category, description} = req.body;
     connection.query(
-        "UPDATE product SET name = ?, price = ?, id = ?, category = ?, description = ? WHERE id = ? ", [name, price, id, category, description, reqId ], (err, results, fields) => {
+        "UPDATE product SET name = ?, price = ?, category = ?, description = ? WHERE id = ? ", [name, price, category, description, id ], (err, results, fields) => {
             if(err) {
                 console.log("error occurred while updating item:", err);
                 throw err;

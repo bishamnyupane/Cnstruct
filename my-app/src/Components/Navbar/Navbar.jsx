@@ -82,8 +82,13 @@ useEffect(() => {
         </div>
 
         {currentUser ? (
-          <>
-          <Link className="btn userNavEmail">
+        <>
+          { currentUser.user.admin && (
+            <Link to="/Admin" className="btn">
+            Admin
+          </Link>
+          )}
+            <Link className="btn userNavEmail">
             {currentUser.user.email}
           </Link>
           <Link to="/login" className="btn" onClick={logOut}>Logout</Link>

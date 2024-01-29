@@ -1,68 +1,67 @@
 import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
-import Ad from '../ls/ad';
 import './Admin.css';
-// import axios from 'axios';
+import axios from 'axios';
 
 const Admin = () => {
-  const location = useLocation();
-  const [addedProducts, setAddedProducts] = useState([]);
-  const [newProduct, setNewProduct] = useState({ id: '', name: '', price: '', description: '', imageFile: null });
-  const [editingProductId, setEditingProductId] = useState(null);
+
+  const [product, setProduct] = useState({ id: undefined, name: '', category: '', price: '', description: '', imageFile: null });
 
   const handleInputChange = (e) => {
     const { name, value, files } = e.target;
     if (name === 'imageFile') {
-      setNewProduct({ ...newProduct, [name]: files[0] });
+      setProduct({...product, imageFile: files[0]});
     } else {
-      setNewProduct({ ...newProduct, [name]: value });
+      setProduct({ ...product, [name]: value });
     }
   };
 
-  const handleAddProduct = () => {
-    if (!newProduct.id || !newProduct.name || !newProduct.price || !newProduct.description || !newProduct.imageFile) {
-        alert('Please fill out all the required fields before adding the product.');
-
-        return;
-
+  const handleAddProduct = async () => {
+    // if (!product.id || !product.name || !product.price || !product.description || !product.imageFile) {
+    //     alert('Please fill out all the   fields before adding the product.');
+    //     return;
+    // }
+    try {
+        const response = await axios.post('http://localhost:3001/item', {
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        category: product.category,
+        description: product.description
+    });
+    console.log("item insertion request response:", response);
+    window.location.href="/home";
+    } catch(error){
+        console.log("error inserting item :", error);
     }
-    const productToAdd = { ...newProduct };
-    setAddedProducts([...addedProducts, productToAdd]);
-    setNewProduct({ id: '', name: '', price: '', description: '', imageFile: null });
-
   };
 
-  const handleDeleteProduct = (id) => {
-    const updatedProducts = addedProducts.filter(product => product.id !== id);
-    setAddedProducts(updatedProducts);
+  const handleDeleteProduct = async () => {
+    try {
+        const response = await axios.delete('http://localhost:3001/item', {
+        id: product.id
+    });
+    console.log("item deletion request response:", response);
+    window.location.href="/home";
+    } catch(error){
+        console.log("error inserting item :", error);
+    }
   };
 
-  const handleEditProduct = (id) => {
-    // Set the editing product id to enable editing mode
-    setEditingProductId(id);
-    // Find the product to edit based on its id
-    const productToEdit = addedProducts.find(product => product.id === id);
-    // Populate the input fields with the product's information
-    setNewProduct({ ...productToEdit });
+  const handleUpdateProduct = async () => {
+    try {
+        const response = await axios.put('http://localhost:3001/item', {
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        category: product.category,
+        description: product.description
+    });
+    console.log("item insertion request response:", response);
+    window.location.href="/home";
+    } catch(error){
+        console.log("error inserting item :", error);
+    }
   };
-
-  const handleSaveEdit = () => {
-    // Find the index of the editing product
-    const editingProductIndex = addedProducts.findIndex(product => product.id === editingProductId);
-    // Create a copy of the products array
-    const updatedProducts = [...addedProducts];
-    // Update the product at the editing index
-    updatedProducts[editingProductIndex] = { ...newProduct };
-    // Update the state with the updated products array
-    setAddedProducts(updatedProducts);
-    // Reset the newProduct and editingProductId state
-    setNewProduct({ id: '', name: '', price: '', description: '', imageFile: null });
-    setEditingProductId(null);
-  };
-
-  if (location.pathname === '/product/:productId') {
-    return null;
-  }
 
 
 
@@ -70,36 +69,46 @@ const Admin = () => {
   return (
     <div className="admin-wrapper">
       <div className="input-form">
-        <h2 className="this">Update and Delete Products</h2>
+        <h2 className="this">Add, Update and Delete Products</h2>
         <div className="input-field">
           <input
-            type="text"
+            type="numeric"
             name="id"
             placeholder="ID"
-            value={newProduct.id}
+            value={product.id}
             onChange={handleInputChange}
             required
           />
         </div>
-        <div class="input-field">
+        <div className="input-field">
           <input
             type="text"
             name="name"
             placeholder="Name"
-            value={newProduct.name}
+            value={product.name}
             onChange={handleInputChange}
-            required
           />
         </div>
         <br />
-        <div class="input-field">
+        <div className="input-field">
+          <input
+            type="text"
+            name="category"
+            placeholder="Category"
+            value={product.category}
+            onChange={handleInputChange}
+             
+          />
+        </div>
+        <br />
+        <div className="input-field">
           <input
             type="number"
             name="price"
             placeholder="Price"
-            value={newProduct.price}
+            value={product.price}
             onChange={handleInputChange}
-            required
+             
           />
         </div>
         <br />
@@ -108,32 +117,40 @@ const Admin = () => {
             type="textarea"
             name="description"
             placeholder="Description"
-            value={newProduct.description}
+            value={product.description}
             onChange={handleInputChange}
-            required
+             
           />
         </div>
         <br />
 
-        <div class="input-field">
+        <div className="input-field">
           <input
             type="file"
             name="imageFile"
             onChange={handleInputChange}
-            required
+             
           />
         </div>
 
         <br />
-        <button className="add-product-btn" onClick={editingProductId ? handleSaveEdit : handleAddProduct}>
-          <span>{editingProductId ? 'Save Edit' : 'Add Product'}</span>
+        <div className="buttonDiv">
+        <button className="add-product-btn" onClick={ handleAddProduct}>
+          <span>{'Add Product'}</span>
         </button>
+        <button className="update-product-btn add-product-btn" onClick={handleUpdateProduct}>
+          <span>{'Update Product'}</span>
+        </button>
+        <button className="update-product-btn add-product-btn" onClick={handleDeleteProduct}>
+          <span>{'Delete Product'}</span>
+        </button>
+        </div>
       </div>
       <br />
       <hr />
       <h2 className="this">Added Product Preview</h2>
 
-      <div className="card-container">
+      {/* <div className="card-container">
         {addedProducts.map((product, index) => (
           <div key={product.id} className="product-card">
             <Ad
@@ -148,7 +165,7 @@ const Admin = () => {
            />
           </div>
         ))}
-      </div>
+      </div> */}
     </div>
   );
 };
