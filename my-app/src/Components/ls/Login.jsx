@@ -64,13 +64,29 @@ const Login = ({ onToggle }) => {
       email: email,
       password: password
     }).then( (response) => {
+      console.log(response);
       if(response.data.token) {
         localStorage.setItem('userObject', JSON.stringify(response.data));
+        if(response.data.user.admin){
+          navigate("/Admin");
+          window.location.reload();
+        } else {
+          navigate("/home");
+          window.location.reload();
+        }
       }
-    }).then( () => {
-      navigate("/home");
-      window.location.reload();
-    })
+    }).catch(error => {
+      // Handle error
+      if (error.response && error.response.status === 401) {
+        setPasswordError(error.response.data.msg);
+      }
+      else if (error.response && error.response.status === 400) {
+        setEmailError(error.response.data.msg);
+      } else {
+        console.error("Error making a post request:", error);
+        // Handle other types of errors (like network errors) here
+      }
+    });
   } catch(err){
     console.error("error making a post request:", err);
   }

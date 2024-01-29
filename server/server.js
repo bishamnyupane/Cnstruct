@@ -110,10 +110,12 @@ app.post('/login', async (req, res) => {
          //validate password
          bcrypt.compare(password, user.password)
          .then(isMatch => {
-            if(!isMatch) return res.status(400).json({msg:'Invalid credentials'});
-
+            if(!isMatch)
+            {
+                 return res.status(401).json({msg:'Invalid credentials'});
+            }
             jwt.sign(
-                { email: user.email },
+                { email: user.email },user.admin ? config.get('jwtAdminSecret') :
                 config.get('jwtUserSecret'),
                 { expiresIn: 3600 },
                 (err, token) => {
@@ -122,7 +124,8 @@ app.post('/login', async (req, res) => {
                         token,
                         user: {
                             name: user.fullName,
-                            email: user.email
+                            email: user.email,
+                            admin: user.admin
                         }
                     });
                 }
