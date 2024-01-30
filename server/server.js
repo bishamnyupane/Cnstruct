@@ -6,6 +6,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const auth = require('./middleware/auth');
 const cors = require('cors');
+const multer = require('multer');
 
 const corsOptions = {
     origin: ['http://localhost:3000', "http://localhost:3001"],
@@ -16,6 +17,26 @@ const corsOptions = {
 
 //creating an instance of express and setting up a middleware to parse JSON in requests
 const app = express();
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'productImages/')
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.originalname)
+    }
+});
+
+const upload = multer({ storage: storage });
+
+app.post('/upload', upload.single('myImage'), (req, res) => {
+    try {
+        res.send({ message: "File uploaded successfully." });
+    } catch (error) {
+        console.error(error);
+        res.sendStatus(500);
+    }
+});
 
 app.use(express.json());
 

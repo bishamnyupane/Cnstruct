@@ -21,6 +21,20 @@ const Admin = () => {
     //     return;
     // }
     try {
+      const formData = new FormData();
+      formData.append('imageFile', product.imageFile);
+      const config = {
+        headers: {
+          'content-type': 'multipart/form-data'
+        }
+      };
+      axios.post(`/upload`, formData, config).then(response => {
+        console.log(response.data);
+      }).catch(
+        error => {
+          console.log("error uploading file", error);
+        }
+      );
         const response = await axios.post('http://localhost:3001/item', {
         id: product.id,
         name: product.name,
