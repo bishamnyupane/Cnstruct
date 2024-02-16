@@ -89,9 +89,9 @@ useEffect(() => {
           </Link>
           )}
             <Link className="btn userNavEmail">
-            {currentUser.user.email}
+            {currentUser.user.name}
           </Link>
-          <Link to="/login" className="btn" onClick={logOut}>Logout</Link>
+          <Link to="/login" className="btn userNavEmail" onClick={logOut}>Logout</Link>
           </>
         ) : 
         (

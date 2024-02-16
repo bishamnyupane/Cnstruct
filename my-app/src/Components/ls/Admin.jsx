@@ -55,14 +55,11 @@ const Admin = () => {
 
   const handleDeleteProduct = async () => {
     try {
-        const response = await axios.delete('http://localhost:3001/item', {
-        id : product.id
-    });
-    console.log("id:", product.id);
+        const response = await axios.delete(`http://localhost:3001/item/${product.id}`);
     console.log("item deletion request response:", response);
     window.location.href="/home";
     } catch(error){
-        console.log("error inserting item :", error);
+        return console.log("error inserting item :", error);
     }
   };
 

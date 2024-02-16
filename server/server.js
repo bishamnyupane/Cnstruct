@@ -320,8 +320,8 @@ app.put('/item', (req, res) => {
 })
 
 
-app.delete('/item', (req, res) => {
-    const id = req.body.id;
+app.delete('/item/:id', (req, res) => {
+    const id = req.params.id;
     connection.query(
         "DELETE FROM product WHERE id = ?", [id], (err, results, fields) => {
             if(err){
