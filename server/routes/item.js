@@ -1,13 +1,13 @@
 const { Router } = require('express');
-const itemHandler = require('../handlers/itemHandlers');
+const itemHandler = require('../logicHandlers/itemHandlers.js');
 const router = Router();
 
-router.get('/items', itemHandler.getItems);
+router.get('/item', itemHandler.getItems);
 
-router.post('/items', itemHandler.postItem);
+router.post('/item', itemHandler.postItem);
 
-router.put('/items/:id', itemHandler.updateItem);
+router.put('/item', itemHandler.updateItem);
 
-router.delete('/items/:id', itemHandler.deleteItem);
+router.delete('/item/:id', itemHandler.deleteItem);
 
 module.exports = router;
