@@ -1,7 +1,8 @@
 const { Router } =require('express');//destructuring the Router object from the express module
 const authHandler = require('../logicHandlers/authHandlers');
 
-const router = Router();
+const router = Router(); //initializing router
+
 const auth = require('../middleware/auth');
 
 router.post('/register', authHandler.signup);
