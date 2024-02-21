@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from './Components/Navbar/Navbar';
 import Login from './Components/ls/Login';
 import Signup from './Components/ls/Signup';
@@ -17,7 +17,6 @@ function App() {
   const handleToggleOption = (option) => {
     setCurrentOption(option);
   };
-
 
   const [cartItems, setCartItems] = useState([]);
   const addToCart = (product) => {

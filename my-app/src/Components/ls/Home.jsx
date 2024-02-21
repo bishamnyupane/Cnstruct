@@ -5,20 +5,25 @@ import axios from 'axios';
 const Home = ({ addToCart }) => {
   
   const [items, setItems] = useState([]);
+  const [images, setImages] = useState([]);
 
   const imagePath = 'http://localhost:3001/productImages/';
 
   useEffect(() => {
-
-      try{
         axios.get('http://localhost:3001/item').then((response) => {
           setItems(response.data);
           console.log("fetched items:", response.data);
-        })
-      } catch(err){
-        return console.log("error fetching items in home page:", err);
-      }
-    
+
+          setImages([]);
+
+          response.data.forEach(item => {
+            axios.get( `http://localhost:3001/productImages/${item.id}.png`, { responseType: 'blob'} )
+            .then((response) => {
+              setImages(prevImages => [...prevImages, { id: item.id, imgFile: URL.createObjectURL(response.data) }]);
+            })
+            .catch(err => console.log("error fetching images:", err));
+          });
+          }).catch(err => console.log("error fetching items in home page:", err));
   }, []);
 
   return (
@@ -26,7 +31,7 @@ const Home = ({ addToCart }) => {
 <div className="app">
 
   {items.map(item => (
-    <Card key={item.id} id={item.id} name={item.name} category={item.category} price={item.price} image={imagePath+item.id+".png"} addToCart={addToCart}/>
+    <Card key={item.id} id={item.id} name={item.name} category={item.category} price={item.price} image={images.find(img => img.id === item.id)?.imgFile || ''} addToCart={addToCart}/>
     )
   )
 }   

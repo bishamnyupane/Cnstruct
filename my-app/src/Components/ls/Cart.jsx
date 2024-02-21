@@ -1,6 +1,5 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { BsFillBagHeartFill } from 'react-icons/bs';
 import { CiCircleRemove } from 'react-icons/ci';
 import './Cart.css';
 
