@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Navbar from './Components/Navbar/Navbar';
 import Login from './Components/ls/Login';
 import Signup from './Components/ls/Signup';
@@ -11,6 +11,10 @@ import Pay from './Components/ls/Pay';
 import ProductDetails from './Components/ls/ProductDetails';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Footer from './Components/Footer/Footer';
+import axios from 'axios';
+
+const currentUser = JSON.parse(localStorage.getItem("userObject"));
+
 function App() {
 
   const [currentOption, setCurrentOption] = useState('Login');
@@ -19,6 +23,7 @@ function App() {
   };
 
   const [cartItems, setCartItems] = useState([]);
+
   const addToCart = (product) => {
     const existingItemIndex = cartItems.findIndex((item) => item.id === product.id);
 
@@ -26,10 +31,26 @@ function App() {
       const updatedCart = [...cartItems];
       updatedCart[existingItemIndex].quantity += 1;
       setCartItems(updatedCart);
+      addToCartServerSide(product, updatedCart[existingItemIndex].quantity);
     } else {
       setCartItems((prevCartItems) => [...prevCartItems, { ...product, quantity: 1 }]);
+      addToCartServerSide(product, 1);
     }
+
   };
+
+  const addToCartServerSide = async(item, quantity) => {
+    try{
+      const response = await axios.post('http://localhost:3001/cart', {
+        userId : currentUser.user.id,
+        productId : item.id,
+        quantity: quantity
+      });
+      console.log("cart item insertion response:", response);
+    } catch(err){
+      console.log("error inserting cart item:", err);
+    }
+  }
  
 
   return (

@@ -84,7 +84,8 @@ module.exports.login = async (req, res) => {
                         user: {
                             name: user.fullName,
                             email: user.email,
-                            admin: user.admin
+                            admin: user.admin,
+                            id : user.id
                         }
                     });
                 }

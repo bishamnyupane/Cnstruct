@@ -3,7 +3,7 @@ const pool = require('../db.js')
 //fetch all items in the cart for displaying in the frontend
 
 module.exports.getCartItems = async (req, res) => {
-    const userId = req.body.id;
+    const userId = req.body.userId;
     try{
         pool.query("SELECT productId, quantity, name, price FROM cart INNER JOIN product ON cart.productId = product.id WHERE userId = ?", [userId], (err, results, fields) => {
             if(err){
@@ -27,7 +27,7 @@ module.exports.getCartItems = async (req, res) => {
 }
 
 module.exports.addCartItem = async (req, res) => {
-    const userId = req.body.id;
+    const userId = req.body.userId;
     const { productId, quantity } = req.body;
 
     try{
@@ -43,10 +43,13 @@ module.exports.addCartItem = async (req, res) => {
 
                     //if product is already present in cart
                     if(foundProduct){
-                        pool.query("UPDATE cart SET quantity = quantity + ? WHERE productId = ? AND userId = ?", [quantity, productId, userId], (err, results, fields) => {
+                        pool.query("UPDATE cart SET quantity = ? WHERE productId = ? AND userId = ?", [quantity, productId, userId], (err, results, fields) => {
                             if(err) throw err;
                             pool.query("SELECT productId, quantity, name, price FROM cart INNER JOIN product ON cart.productId = product.id WHERE userId = ?", [  userId, productId], (err, results, fields) => {
-                                if(err) throw err;
+                                if(err){
+                                    console.log("error adding item to cart:", err);
+                                    return res.send("server error adding item to cart");
+                                }
                                 return res.status(201).send(results);
                             });
                         });
@@ -57,7 +60,10 @@ module.exports.addCartItem = async (req, res) => {
                         pool.query("INSERT INTO cart VALUES (?, ?, ?)", [userId, productId, quantity], (err, results, fields) => {
                             if(err) throw err;
                             pool.query("SELECT productId, quantity, name, price FROM cart INNER JOIN product ON cart.productId = product.id WHERE userId = ?", [  userId], (err, results, fields) => {
-                                if(err) throw err;
+                                if(err) {
+                                    console.log("error adding item to cart:", err);
+                                    return res.send("server error adding item to cart");
+                                }
                                 return res.status(201).send(results);
                             });
                         });
@@ -84,7 +90,7 @@ module.exports.deleteItem = async (req, res) => {
             }
             pool.query("DELETE FROM cart WHERE userId = ? AND productId = ?", [userId, productId], (err, results, fields) => {
                 if(err) throw err;
-                pool.query("SELECT productId, quantity, name, price FROM cart INNER JOIN product ON cart.productId = product.id WHERE userId = ? ", [  userId], (err, results, fields) => {
+                pool.query("SELECT productId, quantity, name, price FROM cart INNER JOIN product ON cart.productId = product.id WHERE id = ? ", [  userId], (err, results, fields) => {
                     if(err) throw err;
                     return res.status(201).send(results);
                 });

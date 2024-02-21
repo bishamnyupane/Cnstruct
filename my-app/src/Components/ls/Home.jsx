@@ -7,8 +7,6 @@ const Home = ({ addToCart }) => {
   const [items, setItems] = useState([]);
   const [images, setImages] = useState([]);
 
-  const imagePath = 'http://localhost:3001/productImages/';
-
   useEffect(() => {
         axios.get('http://localhost:3001/item').then((response) => {
           setItems(response.data);

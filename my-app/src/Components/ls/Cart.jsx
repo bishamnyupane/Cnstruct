@@ -1,21 +1,60 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CiCircleRemove } from 'react-icons/ci';
 import './Cart.css';
+import axios from 'axios';
+
+const currentUser = JSON.parse(localStorage.getItem("userObject"));
 
   const Cart = ({ cartItems , setCartItems}) => {
   const navigate = useNavigate();
+
+  // useEffect(() => {
+  //   axios.get('http://localhost:3001/cart', {
+  //     userId : currentUser.user.id
+  //   }).then((response) => {
+  //     setCartItems(response.data);
+  //     console.log("fetched cart items:", response.data);
+  //   })
+  // })
+
     const handleQuantityChange = (itemId, newQuantity) => {
       newQuantity = Math.max(0, newQuantity);
       const updatedCart = cartItems.map((item) => (item.id === itemId ? { ...item, quantity: newQuantity } : item));
       setCartItems(updatedCart);
-    
+    handleQuantityChangeServerSide(itemId, newQuantity);
     };
+
+    const handleQuantityChangeServerSide = async(itemId, newQuantity) => {
+      try{
+        const response = await axios.post('http://localhost:3001/cart', {
+          userId : currentUser.user.id,
+          productId : itemId,
+          quantity : newQuantity
+        });
+        console.log("update quantity response:", response);
+      } catch(err){
+        console.log("error updating cart item quantity:", err);
+      }
+    }
 
     const handleRemoveItem = (itemId) => {
       const updatedCart = cartItems.filter((item) => item.id !== itemId);
       setCartItems(updatedCart);
+      handleRemoveItemServerSide(itemId);
     };
+
+    const handleRemoveItemServerSide = async(itemId) => {
+      try{
+        const response = await axios.delete('http://localhost:3001/cart', { data: {
+          userId : currentUser.user.id ,
+          productId : itemId
+        } });
+        console.log("cart item removal request response:", response);
+      } catch(err){
+        console.log("error removing item from cart:", err);
+      }
+    }
 
 
   const calculateSubtotal = () => {

@@ -14,10 +14,11 @@ const corsOptions = {
 
 //creating an instance of express and setting up a middleware to parse JSON in requests
 const app = express();
-app.use(express.json());
 
 app.use(cors(corsOptions));
 app.options('*', cors(corsOptions));
+
+app.use(express.json());
 
 //making images available
 app.use('/productImages', express.static('productImages'));
