@@ -53,15 +53,17 @@
   font-size: 24px;
   color: #333;
   margin-bottom: 20px;
-  text-align: center;
+  text-align: left;
   padding: 10px 20px;
-  background-color: orange;
-  border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  /* background-color: orange; */
+  /* border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
 }
 
 .input-form {
   margin-left: 40px;
+  border: 1px solid #ccc;
+
 }
 
 .input-field {
@@ -128,6 +130,7 @@
   padding: 5px;
   justify-content: center;
   align-items: center;
+
 }
 
 .product-card {
@@ -136,4 +139,30 @@
 
 .admin-wrapper {
   margin-left: 20px;
+  display: flex;
+  
+}
+
+
+.orders-btn {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-bottom: 20px; 
+}
+
+.orders-btn:hover {
+  background-color: #0056b3;
+}
+
+.orders-btn:active {
+  background-color: #0056b3;
 }

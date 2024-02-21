@@ -1,9 +1,12 @@
+// Pay.jsx
+
 import React, { useState, useEffect } from "react";
 import "./Pay.css";
 import { useNavigate } from "react-router-dom";
-
+import MyOrders from "./MyOrders";
 import { useLocation } from "react-router-dom";
 import qr from "../../assets/qr.png";
+import Others from "./Others";
 
 const Pay = () => {
   const navigate = useNavigate();
@@ -16,6 +19,7 @@ const Pay = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [selectedPaymentOption, setSelectedPaymentOption] = useState("");
   const [paymentScreenshot, setPaymentScreenshot] = useState(null);
+  const [ordersHistory, setOrdersHistory] = useState([]);
 
   useEffect(() => {
     if (location?.state?.cartItems) {
@@ -46,7 +50,10 @@ const Pay = () => {
       console.log("Order placed successfully!");
       console.log("Selected Payment Option:", selectedPaymentOption);
 
-      if (selectedPaymentOption === "directBankTransfer" && paymentScreenshot) {
+      if (
+        selectedPaymentOption === "directBankTransfer" &&
+        paymentScreenshot
+      ) {
         console.log(
           "Direct Bank Transfer - Payment Screenshot:",
           paymentScreenshot
@@ -54,12 +61,36 @@ const Pay = () => {
       } else if (selectedPaymentOption === "onlinePayment") {
         console.log("Online Payment - Implement Khalti API integration.");
       }
-      navigate("/orderconfirm");
+
+      const newOrder = {
+        items: cartItems.map((item) => ({
+          id: item.id,
+          name: item.name,
+          price: item.price,
+          quantity: item.quantity,
+          image: item.image,
+        })),
+        date: new Date(),
+      };
+
+      setOrdersHistory([...ordersHistory, newOrder]);
+      resetFormFields();
     } else {
       alert(
         "Please fill in all the required fields and select a payment option."
       );
     }
+  };
+
+  const resetFormFields = () => {
+    setFirstName("");
+    setLastName("");
+    setStateVal("");
+    setDistrict("");
+    setPhoneNumber("");
+    setSelectedPaymentOption("");
+    setPaymentScreenshot(null);
+    setCartItems([]);
   };
 
   const handleChange = (e) => {
@@ -69,6 +100,12 @@ const Pay = () => {
   const handleRemoveFile = () => {
     setPaymentScreenshot(null);
   };
+
+  const cancelOrderItem = (orderId, itemId) => {
+  const updatedOrders = [...ordersHistory];
+  updatedOrders[orderId].items.splice(itemId, 1); // Remove the item from the order
+  setOrdersHistory(updatedOrders);
+};
 
   return (
     <div>
@@ -81,93 +118,69 @@ const Pay = () => {
         </div>
       </div>
 
-      <div className="box1">
-        <h2>Personal Information</h2>
+      <div className="input-forms">
+        <h2 className="thiss">Personal Information</h2>
         <form>
-          <table className="personal-info-table">
-            <tbody>
-              <tr>
-                <td>
-                  <label className="la" htmlFor="firstName">
-                    First Name:
-                  </label>
-                </td>
-                <td>
-                  <input
-                    type="text1"
-                    id="firstName"
-                    value={firstName}
-                    onChange={(e) => setFirstName(e.target.value)}
-                    required
-                  />
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <label className="la" htmlFor="lastName">
-                    Last Name:
-                  </label>
-                </td>
-                <td>
-                  <input
-                    type="text1"
-                    id="lastName"
-                    value={lastName}
-                    onChange={(e) => setLastName(e.target.value)}
-                    required
-                  />
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <label className="la" htmlFor="stateVal">
-                    State:
-                  </label>
-                </td>
-                <td>
-                  <input
-                    type="text1"
-                    id="stateVal"
-                    value={stateVal}
-                    onChange={(e) => setStateVal(e.target.value)}
-                    required
-                  />
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <label className="la" htmlFor="district">
-                    District:
-                  </label>
-                </td>
-                <td>
-                  <input
-                    type="text1"
-                    id="district"
-                    value={district}
-                    onChange={(e) => setDistrict(e.target.value)}
-                    required
-                  />
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <label className="la" htmlFor="phoneNumber">
-                    Phone Number:
-                  </label>
-                </td>
-                <td>
-                  <input
-                    type="tel"
-                    id="phoneNumber"
-                    value={phoneNumber}
-                    onChange={(e) => setPhoneNumber(e.target.value)}
-                    required
-                  />
-                </td>
-              </tr>
-            </tbody>
-          </table>
+          <div className="input-field">
+            <label className="la" htmlFor="firstName">
+              First Name:
+            </label>
+            <input
+              type="text"
+              id="firstName"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+              required
+            />
+          </div>
+          <div className="input-field">
+            <label className="la" htmlFor="lastName">
+              Last Name:
+            </label>
+            <input
+              type="text"
+              id="lastName"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+              required
+            />
+          </div>
+          <div className="input-field">
+            <label className="la" htmlFor="stateVal">
+              State:
+            </label>
+            <input
+              type="text"
+              id="stateVal"
+              value={stateVal}
+              onChange={(e) => setStateVal(e.target.value)}
+              required
+            />
+          </div>
+          <div className="input-field">
+            <label className="la" htmlFor="district">
+              District:
+            </label>
+            <input
+              type="text"
+              id="district"
+              value={district}
+              onChange={(e) => setDistrict(e.target.value)}
+              required
+            />
+          </div>
+          <div className="input-field">
+            <label className="la" htmlFor="phoneNumber">
+              Phone Number:
+            </label>
+            <input
+              type="tel"
+              id="phoneNumber"
+              value={phoneNumber}
+              onChange={(e) => setPhoneNumber(e.target.value)}
+              required
+            />
+          </div>
         </form>
       </div>
 
@@ -252,6 +265,8 @@ const Pay = () => {
       <button className="po" onClick={handlePlaceOrder}>
         Place Order
       </button>
+      <Others ordersHistory={ordersHistory} cancelOrder={cancelOrderItem} />
+
     </div>
   );
 };
