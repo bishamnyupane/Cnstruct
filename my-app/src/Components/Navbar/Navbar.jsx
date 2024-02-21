@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BsCart2 } from 'react-icons/bs';
 import { HiOutlineBars3 } from 'react-icons/hi2';
 import {
@@ -18,15 +18,15 @@ import ShoppingCartRoundedIcon from '@mui/icons-material/ShoppingCartRounded';
 import { Link } from 'react-router-dom';
 
 const Navbar = () => {
+
   const [openMenu, setOpenMenu] = useState(false);
+
+  const [currentUser, setCurrentUser] = useState(undefined);
   
   const menuOptions = [
     {
       text: 'Home',
     },
-    // {
-    //   text: 'Shop',
-    // },
     {
       text: 'About',
     },
@@ -44,7 +44,21 @@ const Navbar = () => {
     },
   ];
 
-  
+const getCurrentUser = () => {
+    return JSON.parse(localStorage.getItem("userObject"));
+};
+
+const logOut = () => {
+  localStorage.removeItem("userObject");
+  setCurrentUser(undefined);
+};
+
+useEffect(() => {
+  const user = getCurrentUser();
+  if(user){
+    setCurrentUser(user);
+  }
+}, []);
 
   return (
     <nav>
@@ -67,24 +81,30 @@ const Navbar = () => {
           <img src={search_icon_light} alt="Search" />
         </div>
 
-        {/* <div className="input-group search-box">
-  <input
-    type="text"
-    className="form-control"
-    placeholder="Search"
-  />
-  <button className="btn btn-outline-secondary" type="button">
-    <img src={search_icon_light} alt="Search" />
-  </button>
-</div> */}
-
-
+        {currentUser ? (
+        <>
+          { currentUser.user.admin && (
+            <Link to="/Admin" className="btn">
+            Admin
+          </Link>
+          )}
+            <Link className="btn userNavEmail">
+            {currentUser.user.name}
+          </Link>
+          <Link to="/login" className="btn userNavEmail" onClick={logOut}>Logout</Link>
+          </>
+        ) : 
+        (
+          <>
         <Link to="/login" className="btn">
           Login
         </Link>
         <Link to="/signup" className="btn">
           Signup
         </Link>
+        </>
+        )
+}
       </div>
 
       <div className="navbar-menu-container">

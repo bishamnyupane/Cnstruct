@@ -1,3 +1,8 @@
 {
-    "jwtsecret": "the earth moves in a spiral across space"
+    "jwtUserSecret": "the earth moves in a spiral across space",
+    "jwtAdminSecret": " the earth moves the same for the admin as it does for the user",
+    "host": "172.19.64.1",
+    "dbname": "cnstrct",
+    "user": "root",
+    "pwd": "root123"
 }

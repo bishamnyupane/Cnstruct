@@ -89,3 +89,7 @@ nav {
 .search-box img:hover {
   opacity: 0.8;
 }
+
+.userNavEmail{
+  border: 1px solid black;
+}

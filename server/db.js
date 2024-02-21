@@ -1,22 +1,19 @@
-import mysql from 'mysql2/promise';
+const mysql = require('mysql');
+const config = require('config');
 
-try{
 const pool = mysql.createPool({
-    host: '172.19.64.1',
-    database: 'cnstrct',
-    user: 'root',
-    password: 'root123',
-    waitForConnections: true,
-    connectionLimit: 10,
-    maxIdle: 10,
-    idleTimeout: 60000,
-    queueLimit: 0,
-    enableKeepAlive: true,
-    keepAliveInitialDelay: 0
+    host: config.get('host'),
+    database: config.get('dbname'),
+    user: config.get('user'),
+    password: config.get('pwd'),
+    connectionLimit: 10
 });
-} catch(err)
-{
-    console.log("error while creating pool :", err);
-}
 
-module.exports = { pool };
+pool.getConnection((err, connection) => {
+    if(err) console.log("error getting a connection:", err);
+    console.log("MYSql connected successfully");
+    connection.release();
+    if(err) console.log("error releasing connection:", err);
+})
+
+module.exports = pool;
