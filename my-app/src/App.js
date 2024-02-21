@@ -31,10 +31,14 @@ function App() {
       const updatedCart = [...cartItems];
       updatedCart[existingItemIndex].quantity += 1;
       setCartItems(updatedCart);
-      addToCartServerSide(product, updatedCart[existingItemIndex].quantity);
+      if( currentUser != null){
+        addToCartServerSide(product, updatedCart[existingItemIndex].quantity);
+      }
     } else {
       setCartItems((prevCartItems) => [...prevCartItems, { ...product, quantity: 1 }]);
-      addToCartServerSide(product, 1);
+      if( currentUser != null){
+        addToCartServerSide(product, 1);
+      }
     }
 
   };

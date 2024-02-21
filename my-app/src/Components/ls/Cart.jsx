@@ -10,6 +10,8 @@ const currentUser = JSON.parse(localStorage.getItem("userObject"));
   const navigate = useNavigate();
 
   useEffect(() => {
+    if(currentUser != null)
+    {
     axios.get(`http://localhost:3001/cart/${currentUser.user.id}`).then((response) => {
       const cartData = response.data;
       console.log("fetched cart items:", response.data);
@@ -18,13 +20,16 @@ const currentUser = JSON.parse(localStorage.getItem("userObject"));
     }).catch( (err) => {
       console.log("error loading user cart items:", err);
   });
+}
   }, [setCartItems]);
 
     const handleQuantityChange = (itemId, newQuantity) => {
       newQuantity = Math.max(0, newQuantity);
       const updatedCart = cartItems.map((item) => (item.id === itemId ? { ...item, quantity: newQuantity } : item));
       setCartItems(updatedCart);
-    handleQuantityChangeServerSide(itemId, newQuantity);
+      if( currentUser != null){
+        handleQuantityChangeServerSide(itemId, newQuantity);
+      }
     };
 
     const handleQuantityChangeServerSide = async(itemId, newQuantity) => {
@@ -43,7 +48,9 @@ const currentUser = JSON.parse(localStorage.getItem("userObject"));
     const handleRemoveItem = (itemId) => {
       const updatedCart = cartItems.filter((item) => item.id !== itemId);
       setCartItems(updatedCart);
-      handleRemoveItemServerSide(itemId);
+      if( currentUser != null){
+        handleRemoveItemServerSide(itemId);
+      }
     };
 
     const handleRemoveItemServerSide = async(itemId) => {
