@@ -9,14 +9,16 @@ const currentUser = JSON.parse(localStorage.getItem("userObject"));
   const Cart = ({ cartItems , setCartItems}) => {
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   axios.get('http://localhost:3001/cart', {
-  //     userId : currentUser.user.id
-  //   }).then((response) => {
-  //     setCartItems(response.data);
-  //     console.log("fetched cart items:", response.data);
-  //   })
-  // })
+  useEffect(() => {
+    axios.get(`http://localhost:3001/cart/${currentUser.user.id}`).then((response) => {
+      const cartData = response.data;
+      console.log("fetched cart items:", response.data);
+      const newCartItems = cartData.map(item => ({ id: item.productId, name: item.name, price: item.price, image:`http://localhost:3001/productImages/${item.productId}.png`, quantity: item.quantity }));
+      setCartItems(newCartItems);
+    }).catch( (err) => {
+      console.log("error loading user cart items:", err);
+  });
+  }, [setCartItems]);
 
     const handleQuantityChange = (itemId, newQuantity) => {
       newQuantity = Math.max(0, newQuantity);

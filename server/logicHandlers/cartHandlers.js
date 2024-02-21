@@ -3,9 +3,9 @@ const pool = require('../db.js')
 //fetch all items in the cart for displaying in the frontend
 
 module.exports.getCartItems = async (req, res) => {
-    const userId = req.body.userId;
+    const userId = req.params.userId;
     try{
-        pool.query("SELECT productId, quantity, name, price FROM cart INNER JOIN product ON cart.productId = product.id WHERE userId = ?", [userId], (err, results, fields) => {
+        pool.query("SELECT productId, name, price, quantity FROM cart INNER JOIN product ON cart.productId = product.id WHERE userId = ?", [userId], (err, results, fields) => {
             if(err){
                 console.log("error while fetching cart:", err);
                 throw err;

@@ -3,7 +3,7 @@ const cartHandler = require('../logicHandlers/cartHandlers');
 const router = Router();
 // const auth = require('../middleware/auth');
 
-router.get('/cart', cartHandler.getCartItems);//fetches all the items in the cart of a user with the help of the user id
+router.get('/cart/:userId', cartHandler.getCartItems);//fetches all the items in the cart of a user with the help of the user id
 
 router.post('/cart', cartHandler.addCartItem);//adding item to cart
 
