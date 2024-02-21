@@ -46,7 +46,7 @@
 }
 
 .subtotal-section td {
-  padding: 8px;
+  padding: 3px;
 }
 
 .normal {
@@ -60,4 +60,8 @@
 
 .normal:hover {
   background-color: #45a049;
+}
+
+.small-td {
+  width: 60px;
 }
