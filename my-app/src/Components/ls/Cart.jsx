@@ -123,18 +123,18 @@ const currentUser = JSON.parse(localStorage.getItem("userObject"));
           <h3>Cart Total</h3>
           <table>
             <tr>
-              <td>Cart Subtotal</td>
-              <td>Rs.{calculateSubtotal()}</td>
+              <td className="small-td">Cart Subtotal</td>
+              <td className="small-td">Rs.{calculateSubtotal()}</td>
             </tr>
             <tr>
-              <td>Shipping</td>
-              <td>Free</td>
+              <td className="small-td">Shipping</td>
+              <td className="small-td">Free</td>
             </tr>
             <tr>
-              <td>
-                <strong>Total</strong>
+              <td className="small-td">
+                <strong >Total</strong>
               </td>
-              <td>
+              <td className="small-td">
                 <strong>Rs.{calculateSubtotal()}</strong>
               </td>
             </tr>
