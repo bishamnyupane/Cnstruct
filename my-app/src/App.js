@@ -6,8 +6,9 @@ import Home from './Components/ls/Home';
 import Cart from './Components/ls/Cart';
 import About from './Components/ls/About';
 import Admin from './Components/ls/Admin';
-// import Shop from './Components/ls/Shop';
+import Card from './Components/ls/Card';
 import Pay from './Components/ls/Pay';
+import Others from './Components/ls/Others';
 import ProductDetails from './Components/ls/ProductDetails';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Footer from './Components/Footer/Footer';
@@ -73,6 +74,7 @@ function App() {
 
           <Route path="/Cart" element={<Cart cartItems={cartItems} setCartItems={setCartItems} />} />
           <Route path="/Pay" Component={Pay}/>
+          <Route path="/Others" Component={Others}/>
           <Route path="/product/:productId" element={<ProductDetails onAddToCart={addToCart} />} />
           <Route path="/" element={<Home addToCart={addToCart} cartItems={cartItems} setCartItems={setCartItems} />} />   
 

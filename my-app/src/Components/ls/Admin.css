@@ -55,13 +55,13 @@
     margin-bottom: 20px;
     text-align: center;
     padding: 10px 20px;
-    background-color: orange;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* border-radius: 10px; */
+    /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
   }
   
   .input-form {
     margin-left: 5px;
+    border: 1px solid #ccc;
   }
   
   .input-field {
@@ -136,9 +136,33 @@
   
   .admin-wrapper {
     margin-left: 20px;
+    display: flex;
   }
 
   .buttonDiv{
     display:flex;
     gap: 10px;
+  }
+
+  .orders-btn {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-bottom: 20px; 
+  }
+  
+  .orders-btn:hover {
+    background-color: #0056b3;
+  }
+  
+  .orders-btn:active {
+    background-color: #0056b3;
   }

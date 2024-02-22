@@ -1,10 +1,19 @@
-import React from 'react';
+import React, { useState }  from 'react';
 import { BsFillBagHeartFill } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 
 
 const Card = ({ id, name, price, image, addToCart, category }) => {
   
+  const [isAdded, setIsAdded] = useState(false);
+
+  const handleAddToCart = () => {
+    addToCart({ id, name, price, image });
+    setIsAdded(true);
+    setTimeout(() => {
+      setIsAdded(false);
+    }, 2000); // Reset the state after 2 seconds
+  };
 
   return (
 
@@ -22,10 +31,11 @@ const Card = ({ id, name, price, image, addToCart, category }) => {
     </section>
   </div>
 <div className="bag">
-<button onClick={() => addToCart({ id, name, price, image })}>
+<button onClick={handleAddToCart}>
   <BsFillBagHeartFill />
 </button>
 </div>
+{isAdded && <p className="added-message">Item added to cart!</p>}
 </div>
   );
 };

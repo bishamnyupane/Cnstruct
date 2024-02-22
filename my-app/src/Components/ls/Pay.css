@@ -1,122 +1,122 @@
+.box1 {
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
 
-  .box1 {
-   
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    margin-top: 50px;
-    margin-bottom: 50px;
-  }
-  
-  h2 {
-    font-size: 24px;
-    margin-bottom: 20px;
-  }
-  
-  .xy th {
-    background-color: #f2f2f2;
-  }
-  
-  .pq {
-    font-size: 18px;
-    margin-top: 0;
-  }
-  
-  .form-container {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-gap: 15px;
-  }
-  
-  .personal-info-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
-  }
-  
-  .personal-info-table td {
-    padding: 3px;
-    /* border: 1px solid #ddd; */
-  }
-  
-  .personal-info-table label {
-    display: block;
-    margin-bottom: 5px;
-  }
-  
-  .personal-info-table input {
-    width: 100%;
-    padding: 3px;
- 
-    margin-top: 4px;
-    margin-bottom: 8px;
-  }
-  
-  .ef {
-    font-size: 20px;
-    margin-top: 20px;
-  }
-  
-  .payment-options {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .payment-options label {
-    margin-bottom: 10px;
-  }
-  
-  .ij, .kl {
-    margin-top: 20px;
-  }
-  
- 
-  .po {
-    background-color: #4caf50;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 18px;
-    margin-top: 20px;
-  }
-  
-  .po:hover {
-    background-color: #45a049;
-  }
+h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-align: left;
+  padding: 10px 20px;
+  /* background-color: orange; */
+  color: #333;
+  /* border-radius: 10px; */
+  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
+}
 
-  #directBankDetails {
-    display: none;
-  }
-  
-  #directBankDetails img {
-    max-width: 100%;
-    max-height: 300px;
-  }
+.xy th {
+  background-color: #f2f2f2;
+}
 
- 
+.pq {
+  font-size: 18px;
+  margin-top: 0;
+}
+
+.form-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 15px;
+}
+
+.personal-info-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.personal-info-table td {
+  padding: 3px;
+}
+
+.personal-info-table label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.personal-info-table input {
+  width: 100%;
+  padding: 5px;
+  margin-top: 4px;
+  margin-bottom: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+}
+
+.ef {
+  font-size: 20px;
+  margin-top: 20px;
+}
+
+.payment-options {
+  display: flex;
+  flex-direction: column;
+}
+
+.payment-options label {
+  margin-bottom: 10px;
+}
+
+.ij,
+.kl {
+  margin-top: 20px;
+}
+
+.po {
+  background-color: #4caf50;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 18px;
+  margin-top: 20px;
+}
+
+.po:hover {
+  background-color: #45a049;
+}
+
+#directBankDetails {
+  display: none;
+}
+
+#directBankDetails img {
+  max-width: 100%;
+  max-height: 300px;
+}
+
 #directBankDetails {
   margin-top: 20px;
   padding: 20px;
   border: 1px solid #ddd;
   background-color: #f9f9f9;
 }
-
 #directBankDetails p {
   margin: 5px 0;
 }
-
 #directBankDetails img {
   max-width: 100%;
   height: auto;
   margin-top: 10px;
 }
-
 .file-upload {
   margin-top: 20px;
 }
-
 .file-label {
   background-color: red;
   color: white;
@@ -125,27 +125,84 @@
   cursor: pointer;
   display: inline-block;
 }
-
 #file-input {
   display: none; 
 }
-
 .uploaded-file {
   margin-top: 10px;
   display: flex;
   align-items: center;
 }
-
 .uploaded-file span {
   margin-right: 10px;
 }
-
 .remove-file {
   color: #ff0000;
   cursor: pointer;
 }
 
-/* Optional: Style for hiding the file input label when a file is uploaded */
-/* #file-input:not(:focus) + .file-label {
-  display: none;
-} */
+.input-forms {
+  margin-left: 40px;
+}
+
+.input-field {
+  margin-bottom: 10px;
+}
+
+.thiss {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: left;
+  padding: 10px 20px;
+  /* background-color: red; */
+  /* border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
+}
+
+.input-field input[type="text"],
+.input-field input[type="number"],
+.input-field input[type="tel"],
+.input-field input[type="file"],
+.input-field textarea {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  padding: 10px;
+  outline: none;
+}
+
+.input-field input[type="text"]:focus,
+.input-field input[type="number"]:focus,
+.input-field input[type="tel"]:focus,
+.input-field input[type="file"]:focus,
+.input-field textarea:focus {
+  border-bottom: 1px solid #007bff;
+}
+
+.add-product-btn {
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add-product-btn:hover {
+  background-color: #45a049;
+}
+
+.add-product-btn:active {
+  background-color: #3e8e41;
+}
+
+.add-product-btn span {
+  display: inline-block;
+  vertical-align: middle;
+}
