@@ -5,6 +5,7 @@ import "./Pay.css";
 import { useLocation } from "react-router-dom";
 import qr from "../../assets/qr.png";
 import Others from "./Others";
+import axios from 'axios';
 
 const Pay = () => {
   const location = useLocation();
@@ -62,14 +63,15 @@ const Pay = () => {
       const newOrder = {
         items: cartItems.map((item) => ({
           id: item.id,
-          name: item.name,
-          price: item.price,
           quantity: item.quantity,
-          image: item.image,
         })),
         date: new Date(),
+        total: calculateSubtotal()
       };
 
+      handlePlaceOrderServerSide(newOrder);
+      console.log(newOrder);
+      
       setOrdersHistory([...ordersHistory, newOrder]);
       resetFormFields();
     } else {
@@ -78,6 +80,19 @@ const Pay = () => {
       );
     }
   };
+
+  const handlePlaceOrderServerSide = async(newOrder) => {
+    const currentUser = JSON.parse(localStorage.getItem("userObject"));
+    try{
+      const response = await axios.post('http://localhost:3001/order', {
+        userId : currentUser.user.id,
+        order: newOrder
+      });
+      console.log("order placement response:", response);
+    } catch(err){
+      console.log("error placing order:", err);
+    }
+  }
 
   const resetFormFields = () => {
     setFirstName("");

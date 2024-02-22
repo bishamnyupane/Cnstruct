@@ -86,14 +86,22 @@ const Home = ({ addToCart }) => {
           <Card id={10} name="Fomtite (Tierod)" price="200" image={images.find(img => img.id === 10)?.imgFile || ''} addToCart={addToCart} />
         </>
       )}
+
+{items.map(item => (
+  (item.id> 10)?  
+  <Card key={item.id} id={item.id} name={item.name} category={item.category} price={item.price} image={images.find(img => img.id === item.id)?.imgFile || ''} addToCart={addToCart}/>
+  :
+  <></>
+  )
+)
+}
+
         </>
+
+
       )}
       
-  {items.map(item => (
-    <Card key={item.id} id={item.id} name={item.name} category={item.category} price={item.price} image={images.find(img => img.id === item.id)?.imgFile || ''} addToCart={addToCart}/>
-    )
-  )
-}   
+   
     </div>
      );
     };

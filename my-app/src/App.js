@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from './Components/Navbar/Navbar';
 import Login from './Components/ls/Login';
 import Signup from './Components/ls/Signup';
@@ -24,6 +24,12 @@ function App() {
   };
 
   const [cartItems, setCartItems] = useState([]);
+
+  useEffect(() => {
+    if(currentUser === undefined){
+      setCartItems([]);
+    }
+  }, []);
 
   const addToCart = (product) => {
     const existingItemIndex = cartItems.findIndex((item) => item.id === product.id);

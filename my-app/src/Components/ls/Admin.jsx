@@ -1,21 +1,8 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import Ad from "../ls/ad";
 import './Admin.css';
 import axios from 'axios';
 
 const Admin = () => {
-  const navigate = useNavigate();
-
-  const [addedProducts, setAddedProducts] = useState([]);
-  const [newProduct, setNewProduct] = useState({
-    id: "",
-    name: "",
-    price: "",
-    description: "",
-    imageFile: null,
-  });
-  const [editingProductId, setEditingProductId] = useState(null);
 
   const [product, setProduct] = useState({ id: undefined, name: '', category: '', price: '', description: '', imageFile: null });
 
@@ -23,10 +10,8 @@ const Admin = () => {
     const { name, value, files } = e.target;
     if (name === 'imageFile') {
       setProduct({...product, imageFile: files[0]});
-      setNewProduct({ ...newProduct, [name]: files[0] });
     } else {
       setProduct({ ...product, [name]: value });
-      setNewProduct({ ...newProduct, [name]: value });
     }
   };
 
@@ -35,15 +20,6 @@ const Admin = () => {
     //     alert('Please fill out all the   fields before adding the product.');
     //     return;
     // }
-    const productToAdd = { ...newProduct };
-    setAddedProducts([...addedProducts, productToAdd]);
-    setNewProduct({
-      id: "",
-      name: "",
-      price: "",
-      description: "",
-      imageFile: null,
-    });
     try {
         const response = await axios.post('http://localhost:3001/item', {
         id: product.id,
@@ -59,11 +35,7 @@ const Admin = () => {
     }
   };
 
-  const handleDeleteProduct = async (id) => {
-    const updatedProducts = addedProducts.filter(
-      (product) => product.id !== id
-    );
-    setAddedProducts(updatedProducts);
+  const handleDeleteProduct = async () => {
     try {
         const response = await axios.delete(`http://localhost:3001/item/${product.id}`);
     console.log("item deletion request response:", response);
@@ -72,31 +44,6 @@ const Admin = () => {
         return console.log("error inserting item :", error);
     }
   };
-
-  const handleEditProduct = (id) => {
-    // Set the editing product id to enable editing mode
-    setEditingProductId(id);
-    // Populate the input fields with the product's information
-    const productToEdit = addedProducts.find((product) => product.id === id);
-    setNewProduct({ ...productToEdit });
-  };
-
-  const handleSaveEdit = () => {
-    const editingProductIndex = addedProducts.findIndex(
-      (product) => product.id === editingProductId
-    );
-    const updatedProducts = [...addedProducts];
-    updatedProducts[editingProductIndex] = { ...newProduct };
-    setAddedProducts(updatedProducts);
-    setNewProduct({
-      id: "",
-      name: "",
-      price: "",
-      description: "",
-      imageFile: null,
-    });
-    setEditingProductId(null);
-  }
 
   const handleUpdateProduct = async () => {
     try {
@@ -114,20 +61,11 @@ const Admin = () => {
     }
   };
 
-  const handleViewOrders = () => {
-
-    navigate('/order'); 
-  };
 
 
 
   return (
     <div className="admin-wrapper">
-    <div className="order">
-        <button className="orders-btn" onClick={handleViewOrders}>
-          Orders
-        </button>
-      </div>
       <div className="input-form">
         <h2 className="this">Add, Update and Delete Products</h2>
         <div className="input-field">
@@ -195,7 +133,7 @@ const Admin = () => {
 
         <br />
         <div className="buttonDiv">
-        <button className="add-product-btn" onClick={ editingProductId ? handleSaveEdit : handleAddProduct}>
+        <button className="add-product-btn" onClick={ handleAddProduct}>
           <span>{'Add Product'}</span>
         </button>
         <button className="update-product-btn add-product-btn" onClick={handleUpdateProduct}>
@@ -208,9 +146,9 @@ const Admin = () => {
       </div>
       <br />
       <hr />
-      <h2 className="this">Added Product Preview</h2>
+      {/* <h2 className="this">Added Product Preview</h2> */}
 
-      <div className="card-container">
+      {/* <div className="card-container">
         {addedProducts.map((product, index) => (
           <div key={product.id} className="product-card">
             <Ad
@@ -225,7 +163,7 @@ const Admin = () => {
            />
           </div>
         ))}
-      </div>
+      </div> */}
     </div>
   );
 };

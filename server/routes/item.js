@@ -6,10 +6,10 @@ const router = Router();
 
 router.get('/item', itemHandler.getItems);
 
-router.post('/item', auth.adminAuth, itemHandler.postItem);
+router.post('/item', itemHandler.postItem);
 
-router.put('/item', auth.adminAuth, itemHandler.updateItem);
+router.put('/item', itemHandler.updateItem);
 
-router.delete('/item/:id', auth.adminAuth, itemHandler.deleteItem);
+router.delete('/item/:id', itemHandler.deleteItem);
 
 module.exports = router;

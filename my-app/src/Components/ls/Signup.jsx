@@ -27,6 +27,19 @@ const Signup = ({ onToggle }) => {
 
 
   const handleSignup = async () => {
+
+    if(!formData.email && !formData.password){
+      setApiError("Provide email and password");
+      return;
+    }
+
+    let emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+    if(!emailRegex.test(formData.email)){
+      setApiError("Please provide a valid email");
+      return;
+    }
+
       try {
         const response = await axios.post('http://localhost:3001/register', formData);
         console.log(response);

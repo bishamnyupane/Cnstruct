@@ -149,4 +149,13 @@
   cursor: pointer;
 }
 
+.category-selector{
+  position: absolute;
+  left: 0px;
+  margin-bottom: 5px;
+padding-bottom: 0px;
+  bottom: 80%;
+  padding-left: 10px;
+}
+
 /* Add more styles as needed */

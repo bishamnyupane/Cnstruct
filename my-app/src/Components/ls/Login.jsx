@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link ,useNavigate} from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
@@ -16,6 +16,13 @@ const Login = ({ onToggle }) => {
   const [emailError, setEmailError] = useState('');
 
   const navigate = useNavigate(); // Import useNavigate
+
+  useEffect(() => {
+    const currentUser = JSON.parse(localStorage.getItem("userObject"));
+    if(currentUser != undefined){
+      navigate('/home');
+    }
+  }, );
 
   const handleTogglePassword = () => {
     setShowPassword(!showPassword);
@@ -106,6 +113,7 @@ const Login = ({ onToggle }) => {
           <input
             type="text"
             className="username-input-box"
+            placeholder = "Email"
             value={email}
             onChange = {onEmailChange}
           />
@@ -116,6 +124,7 @@ const Login = ({ onToggle }) => {
           <input
             type={showPassword ? 'text' : 'password'}
             className="password-input-box"
+            placeholder='Password'
             value={password}
             onChange = {onPasswordChange}
           />
@@ -125,9 +134,9 @@ const Login = ({ onToggle }) => {
           {passwordError && <div className="password-error">{passwordError}</div>}
         </div>
       </div>
-      <div className='forget-password'>
+      {/* <div className='forget-password'>
         Forget Password?<span>Click Here!</span>
-      </div>
+      </div> */}
       <div className='submit-container'>  
         <Link to="/Login" className='submit' onClick={handleLoginClick}>
 

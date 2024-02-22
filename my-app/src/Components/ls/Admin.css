@@ -166,3 +166,10 @@
   .orders-btn:active {
     background-color: #0056b3;
   }
+
+  .admin-wrapper{
+    position: relative;
+    left: 35%;
+    top: 0%;
+    margin-bottom: 20px;
+  }
